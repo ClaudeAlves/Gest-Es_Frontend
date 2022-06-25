@@ -65,7 +65,7 @@ export default class MarkApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = ['Number'];

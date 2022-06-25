@@ -37,13 +37,10 @@ const connexion = {
             return state.login.isLoggedIn;
         },
         isAdmin(state) {
-            for (let i = 0; i < state.login.data.roles.length; i++) {
-                const e = state.login.data.roles[i];
-                if (e === 'ROLE_ADMIN') {
-                    return true;
-                }
-            }
-            return false;
+            return isRole("ROLE_ADMIN", state)
+        },
+        isTeacher(state) {
+            return isRole("ROLE_TEACHER", state)
         }
     },
     actions: {
@@ -56,11 +53,13 @@ const connexion = {
             // First commit the waiting mutation
             commit('mutationLoginWaiting', {});
             const api = new AuthenticationApi();
-
+            console.log(loginRequestDTO);
             api.login({ loginRequestDTO }, (e, d, /* eslint-disable */r/* eslint-enable */) => {
                 if (e) {
+                    console.log("dans le login avec erreur");
                     StateHelper.simpleErrorManagement(e, 'mutationLoginError', commit);
                 } else {
+                    console.log("dans le login sans erreur");
                     commit('mutationLoginSuccess', { ...d });
                 }
             });
@@ -157,5 +156,13 @@ const connexion = {
         },
     },
 }
-
+var isRole = function (role, state) {
+    for (let i = 0; i < state.login.data.roles.length; i++) {
+        const e = state.login.data.roles[i];
+        if (e === role) {
+            return true;
+        }
+    }
+    return false;
+}
 export default connexion;

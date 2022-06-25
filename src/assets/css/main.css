@@ -1,0 +1,40 @@
+.logo {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+    color: brown;
+    font-size: x-large;
+}
+
+.nav-bar-user {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 15px;
+    color: black;
+    font-size: x-large;
+}
+
+.navbar {
+    width: 100%;
+    background-color: cadetblue;
+    display: flex;
+    box-shadow: 0.1px 0.1px 15px 0.1px #273c75;
+}
+
+.nav-link {
+    font-size: x-large;
+    padding: 10px;
+    color: #273c75;
+    display:inline-block;
+}
+
+.nav-link:hover {
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.nav-elements {
+    text-align: center;
+    margin: auto;
+}
+

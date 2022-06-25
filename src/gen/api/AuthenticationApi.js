@@ -103,7 +103,7 @@ export default class AuthenticationApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = ApiMessageDTO;

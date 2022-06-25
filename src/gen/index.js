@@ -19,11 +19,12 @@ import LoginSuccessDTO from './model/LoginSuccessDTO';
 import RegisterDTO from './model/RegisterDTO';
 import RoleDTO from './model/RoleDTO';
 import UserDTO from './model/UserDTO';
-import AuthenticatedApi from './api/AuthenticatedApi';
+import UserModificationDTO from './model/UserModificationDTO';
+import UserSimpleDTO from './model/UserSimpleDTO';
 import AuthenticationApi from './api/AuthenticationApi';
 import CalendarApi from './api/CalendarApi';
-import DefaultApi from './api/DefaultApi';
 import MarkApi from './api/MarkApi';
+import UserApi from './api/UserApi';
 
 
 /**
@@ -101,10 +102,16 @@ export {
     UserDTO,
 
     /**
-    * The AuthenticatedApi service constructor.
-    * @property {module:api/AuthenticatedApi}
-    */
-    AuthenticatedApi,
+     * The UserModificationDTO model constructor.
+     * @property {module:model/UserModificationDTO}
+     */
+    UserModificationDTO,
+
+    /**
+     * The UserSimpleDTO model constructor.
+     * @property {module:model/UserSimpleDTO}
+     */
+    UserSimpleDTO,
 
     /**
     * The AuthenticationApi service constructor.
@@ -119,14 +126,14 @@ export {
     CalendarApi,
 
     /**
-    * The DefaultApi service constructor.
-    * @property {module:api/DefaultApi}
-    */
-    DefaultApi,
-
-    /**
     * The MarkApi service constructor.
     * @property {module:api/MarkApi}
     */
-    MarkApi
+    MarkApi,
+
+    /**
+    * The UserApi service constructor.
+    * @property {module:api/UserApi}
+    */
+    UserApi
 };

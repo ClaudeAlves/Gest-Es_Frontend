@@ -65,7 +65,7 @@ export default class CalendarApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = Object;
@@ -102,7 +102,7 @@ export default class CalendarApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = Object;
@@ -145,7 +145,7 @@ export default class CalendarApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = Object;

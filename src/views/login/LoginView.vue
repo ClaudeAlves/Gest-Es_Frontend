@@ -33,14 +33,19 @@
             </div>
 
             <div class="main-title">
-              <button v-on:click="loginButton">
+              <v-btn
+                  type="submit"
+                  class="button-general"
+                  data-ruid="loginButton"
+                  color="#5ee4cc"
+              >
                 Connexion
                 {{
                   this.$store.getters.getLogin.state === "WAITING"
                       ? "..."
                       : ""
                 }}
-              </button>
+              </v-btn>
             </div>
           </form>
         </md-card-content>
@@ -50,7 +55,19 @@
 </template>
 
 <style>
+.container .row {
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+}
 
+.login-title {
+  text-align: center;
+}
+
+.main-title {
+  text-align: center;
+}
 </style>
 
 <script>
@@ -83,4 +100,5 @@ export default {
   },
 };
 </script>
+
 
