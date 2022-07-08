@@ -554,7 +554,7 @@ class ApiClient {
     hostSettings() {
         return [
             {
-              'url': "http://localhost:8081/",
+              'url': "http://localhost:8081",
               'description': "Api Gest-ES",
             }
       ];

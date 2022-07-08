@@ -16,7 +16,7 @@ const profile = {
                 "lastname": "novo",
                 "birthdate": "2000-01-09",
                 "email": "polo@po.lo",
-                "password": "", // TODO delete from backend and from here !!!
+                "password": "",
                 "roles": [
                     {
                         "id": 1,

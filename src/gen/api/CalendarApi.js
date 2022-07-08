@@ -13,6 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
+import CalendarDTO from '../model/CalendarDTO';
 
 /**
 * Calendar service.
@@ -37,7 +38,7 @@ export default class CalendarApi {
      * Callback function to receive the result of the getCalendar operation.
      * @callback module:api/CalendarApi~getCalendarCallback
      * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
+     * @param {module:model/CalendarDTO} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -46,7 +47,7 @@ export default class CalendarApi {
      * This endpoint is used to get the calendar of a user
      * @param {String} username 
      * @param {module:api/CalendarApi~getCalendarCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * data is of type: {@link module:model/CalendarDTO}
      */
     getCalendar(username, callback) {
       let postBody = null;
@@ -68,7 +69,7 @@ export default class CalendarApi {
       let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = Object;
+      let returnType = CalendarDTO;
       return this.apiClient.callApi(
         '/calendar/{username}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -80,7 +81,7 @@ export default class CalendarApi {
      * Callback function to receive the result of the getCalendarUser operation.
      * @callback module:api/CalendarApi~getCalendarUserCallback
      * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
+     * @param {module:model/CalendarDTO} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -88,7 +89,7 @@ export default class CalendarApi {
      * Get a specific user calendar.
      * This endpoint is used to get the calendar of the authenticated user
      * @param {module:api/CalendarApi~getCalendarUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * data is of type: {@link module:model/CalendarDTO}
      */
     getCalendarUser(callback) {
       let postBody = null;
@@ -105,7 +106,7 @@ export default class CalendarApi {
       let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = Object;
+      let returnType = CalendarDTO;
       return this.apiClient.callApi(
         '/calendar', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -117,7 +118,7 @@ export default class CalendarApi {
      * Callback function to receive the result of the getClassCalendar operation.
      * @callback module:api/CalendarApi~getClassCalendarCallback
      * @param {String} error Error message, if any.
-     * @param {Object} data The data returned by the service call.
+     * @param {module:model/CalendarDTO} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -126,7 +127,7 @@ export default class CalendarApi {
      * This endpoint is used to get the calendar of a class
      * @param {String} className 
      * @param {module:api/CalendarApi~getClassCalendarCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Object}
+     * data is of type: {@link module:model/CalendarDTO}
      */
     getClassCalendar(className, callback) {
       let postBody = null;
@@ -148,7 +149,7 @@ export default class CalendarApi {
       let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = Object;
+      let returnType = CalendarDTO;
       return this.apiClient.callApi(
         '/calendar/class/{className}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,

@@ -43,7 +43,7 @@ export default class MarkApi {
 
     /**
      * Get marks.
-     * This endpoint is sused to get the marks of a student
+     * This endpoint is used to get the marks of a student
      * @param {String} studentUsername 
      * @param {module:api/MarkApi~getStudentMarksCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<Number>}

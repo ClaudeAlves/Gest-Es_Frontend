@@ -14,15 +14,20 @@
 
 import ApiClient from './ApiClient';
 import ApiMessageDTO from './model/ApiMessageDTO';
+import CalendarDTO from './model/CalendarDTO';
+import CourseDTO from './model/CourseDTO';
 import LoginRequestDTO from './model/LoginRequestDTO';
 import LoginSuccessDTO from './model/LoginSuccessDTO';
+import ModuleDTO from './model/ModuleDTO';
 import RegisterDTO from './model/RegisterDTO';
 import RoleDTO from './model/RoleDTO';
+import SubjectDTO from './model/SubjectDTO';
 import UserDTO from './model/UserDTO';
 import UserModificationDTO from './model/UserModificationDTO';
 import UserSimpleDTO from './model/UserSimpleDTO';
 import AuthenticationApi from './api/AuthenticationApi';
 import CalendarApi from './api/CalendarApi';
+import CreationApi from './api/CreationApi';
 import MarkApi from './api/MarkApi';
 import UserApi from './api/UserApi';
 
@@ -72,6 +77,18 @@ export {
     ApiMessageDTO,
 
     /**
+     * The CalendarDTO model constructor.
+     * @property {module:model/CalendarDTO}
+     */
+    CalendarDTO,
+
+    /**
+     * The CourseDTO model constructor.
+     * @property {module:model/CourseDTO}
+     */
+    CourseDTO,
+
+    /**
      * The LoginRequestDTO model constructor.
      * @property {module:model/LoginRequestDTO}
      */
@@ -84,6 +101,12 @@ export {
     LoginSuccessDTO,
 
     /**
+     * The ModuleDTO model constructor.
+     * @property {module:model/ModuleDTO}
+     */
+    ModuleDTO,
+
+    /**
      * The RegisterDTO model constructor.
      * @property {module:model/RegisterDTO}
      */
@@ -94,6 +117,12 @@ export {
      * @property {module:model/RoleDTO}
      */
     RoleDTO,
+
+    /**
+     * The SubjectDTO model constructor.
+     * @property {module:model/SubjectDTO}
+     */
+    SubjectDTO,
 
     /**
      * The UserDTO model constructor.
@@ -124,6 +153,12 @@ export {
     * @property {module:api/CalendarApi}
     */
     CalendarApi,
+
+    /**
+    * The CreationApi service constructor.
+    * @property {module:api/CreationApi}
+    */
+    CreationApi,
 
     /**
     * The MarkApi service constructor.
