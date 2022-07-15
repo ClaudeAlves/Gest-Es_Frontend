@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The CourseDTO model module.
- * @module model/CourseDTO
+ * The PeriodDTO model module.
+ * @module model/PeriodDTO
  * @version 1.0.0
  */
-class CourseDTO {
+class PeriodDTO {
     /**
-     * Constructs a new <code>CourseDTO</code>.
-     * @alias module:model/CourseDTO
+     * Constructs a new <code>PeriodDTO</code>.
+     * @alias module:model/PeriodDTO
      */
     constructor() { 
         
-        CourseDTO.initialize(this);
+        PeriodDTO.initialize(this);
     }
 
     /**
@@ -37,18 +37,21 @@ class CourseDTO {
     }
 
     /**
-     * Constructs a <code>CourseDTO</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>PeriodDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/CourseDTO} obj Optional instance to populate.
-     * @return {module:model/CourseDTO} The populated <code>CourseDTO</code> instance.
+     * @param {module:model/PeriodDTO} obj Optional instance to populate.
+     * @return {module:model/PeriodDTO} The populated <code>PeriodDTO</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new CourseDTO();
+            obj = obj || new PeriodDTO();
 
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            if (data.hasOwnProperty('id')) {
+                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
+            }
+            if (data.hasOwnProperty('tag')) {
+                obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
             }
             if (data.hasOwnProperty('start')) {
                 obj['start'] = ApiClient.convertToType(data['start'], 'Date');
@@ -56,8 +59,8 @@ class CourseDTO {
             if (data.hasOwnProperty('end')) {
                 obj['end'] = ApiClient.convertToType(data['end'], 'Date');
             }
-            if (data.hasOwnProperty('periodsOfTheWeek')) {
-                obj['periodsOfTheWeek'] = ApiClient.convertToType(data['periodsOfTheWeek'], ['Number']);
+            if (data.hasOwnProperty('text')) {
+                obj['text'] = ApiClient.convertToType(data['text'], 'String');
             }
         }
         return obj;
@@ -67,31 +70,37 @@ class CourseDTO {
 }
 
 /**
- * @member {String} name
+ * @member {Number} id
  */
-CourseDTO.prototype['name'] = undefined;
+PeriodDTO.prototype['id'] = undefined;
 
 /**
- * start of the course
+ * @member {String} tag
+ */
+PeriodDTO.prototype['tag'] = undefined;
+
+/**
+ * begin of the period
  * @member {Date} start
  */
-CourseDTO.prototype['start'] = undefined;
+PeriodDTO.prototype['start'] = undefined;
 
 /**
- * end of the course
+ * end of the period
  * @member {Date} end
  */
-CourseDTO.prototype['end'] = undefined;
+PeriodDTO.prototype['end'] = undefined;
 
 /**
- * @member {Array.<Number>} periodsOfTheWeek
+ * description of the period
+ * @member {String} text
  */
-CourseDTO.prototype['periodsOfTheWeek'] = undefined;
+PeriodDTO.prototype['text'] = undefined;
 
 
 
 
 
 
-export default CourseDTO;
+export default PeriodDTO;
 

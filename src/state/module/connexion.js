@@ -30,9 +30,6 @@ const connexion = {
         getLogin(state) {
             return state.login;
         },
-        getRegister(state) {
-            return state.register;
-        },
         isLoggedIn(state) {
             return state.login.isLoggedIn;
         },
@@ -41,6 +38,9 @@ const connexion = {
         },
         isTeacher(state) {
             return isRole("ROLE_TEACHER", state)
+        },
+        getStateCalendar(state, _, rootState) {
+            return rootState.calendar;
         }
     },
     actions: {
@@ -53,27 +53,11 @@ const connexion = {
             // First commit the waiting mutation
             commit('mutationLoginWaiting', {});
             const api = new AuthenticationApi();
-            console.log(loginRequestDTO);
             api.login({ loginRequestDTO }, (e, d, /* eslint-disable */r/* eslint-enable */) => {
                 if (e) {
-                    console.log("dans le login avec erreur");
                     StateHelper.simpleErrorManagement(e, 'mutationLoginError', commit);
                 } else {
-                    console.log("dans le login sans erreur");
                     commit('mutationLoginSuccess', { ...d });
-                }
-            });
-        },
-        actionRegister({ commit }, registerDTO) {
-            // First commit the waiting mutation
-            commit('mutationRegisterWaiting', {});
-            const api = new AuthenticationApi();
-
-            api.register({ registerDTO }, (e, d, /* eslint-disable */r/* eslint-enable */) => {
-                if (e) {
-                    StateHelper.simpleErrorManagement(e, 'mutationRegisterError', commit);
-                } else {
-                    commit('mutationRegisterSuccess', { ...d });
                 }
             });
         },
@@ -97,7 +81,7 @@ const connexion = {
          * @param {*} state the application state in Vuex store to modify.
          * @param {*} data Additional data to update the state accordingly.
          */
-        mutationLoginWaiting(state, /* eslint-disable */data/* eslint-enable */) {
+        mutationLoginWaiting(state, data) {
             state.login.state = States.WAITING;
         },
         mutationLoginSuccess(state, data) {
@@ -114,7 +98,7 @@ const connexion = {
             if (router.currentRoute.params.nextUrl !== undefined) {
                 router.push(router.currentRoute.params.nextUrl)
             } else {
-                router.push('/home');
+                router.push('/profile');
             }
             Notifications.success("Authentication Réussie", "Bienvenue " + data.username + " !");
         },
@@ -123,7 +107,7 @@ const connexion = {
             state.login.message = data.message;
             Notifications.error("Erreur d'Authentication", data.message);
         },
-        mutationRegisterWaiting(state, /* eslint-disable */data/* eslint-enable */) {
+        mutationRegisterWaiting(state, data) {
             state.register.state = States.WAITING;
         },
         mutationRegisterSuccess(state, data) {
@@ -142,10 +126,10 @@ const connexion = {
             Notifications.error("Erreur d'Inscription", data.message);
         },
 
-        mutationLogoutWaiting(state, /* eslint-disable */data/* eslint-enable */) {
+        mutationLogoutWaiting(state, data) {
             state.login.state = States.WAITING;
         },
-        mutationLogoutSuccess(state, /* eslint-disable */data/* eslint-enable */) {
+        mutationLogoutSuccess(state, data) {
             state.login = initialState().login;
             Notifications.success("Déconnexion Réussie", "Au revoir !");
         },

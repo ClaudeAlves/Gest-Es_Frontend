@@ -59,9 +59,6 @@ class UserModificationDTO {
             if (data.hasOwnProperty('lastname')) {
                 obj['lastname'] = ApiClient.convertToType(data['lastname'], 'String');
             }
-            if (data.hasOwnProperty('birthdate')) {
-                obj['birthdate'] = ApiClient.convertToType(data['birthdate'], 'Date');
-            }
             if (data.hasOwnProperty('email')) {
                 obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
@@ -94,11 +91,6 @@ UserModificationDTO.prototype['firstname'] = undefined;
  * @member {String} lastname
  */
 UserModificationDTO.prototype['lastname'] = undefined;
-
-/**
- * @member {Date} birthdate
- */
-UserModificationDTO.prototype['birthdate'] = undefined;
 
 /**
  * @member {String} email

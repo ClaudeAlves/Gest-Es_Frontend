@@ -45,19 +45,19 @@ export default class CalendarApi {
     /**
      * Get a specific user calendar.
      * This endpoint is used to get the calendar of a user
-     * @param {String} username 
+     * @param {Number} userId 
      * @param {module:api/CalendarApi~getCalendarCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/CalendarDTO}
      */
-    getCalendar(username, callback) {
+    getCalendar(userId, callback) {
       let postBody = null;
-      // verify the required parameter 'username' is set
-      if (username === undefined || username === null) {
-        throw new Error("Missing the required parameter 'username' when calling getCalendar");
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling getCalendar");
       }
 
       let pathParams = {
-        'username': username
+        'userId': userId
       };
       let queryParams = {
       };
@@ -71,7 +71,7 @@ export default class CalendarApi {
       let accepts = ['application/json'];
       let returnType = CalendarDTO;
       return this.apiClient.callApi(
-        '/calendar/{username}', 'GET',
+        '/calendar/user/{userId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -125,19 +125,19 @@ export default class CalendarApi {
     /**
      * Get a class calendar.
      * This endpoint is used to get the calendar of a class
-     * @param {String} className 
+     * @param {Number} classId 
      * @param {module:api/CalendarApi~getClassCalendarCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/CalendarDTO}
      */
-    getClassCalendar(className, callback) {
+    getClassCalendar(classId, callback) {
       let postBody = null;
-      // verify the required parameter 'className' is set
-      if (className === undefined || className === null) {
-        throw new Error("Missing the required parameter 'className' when calling getClassCalendar");
+      // verify the required parameter 'classId' is set
+      if (classId === undefined || classId === null) {
+        throw new Error("Missing the required parameter 'classId' when calling getClassCalendar");
       }
 
       let pathParams = {
-        'className': className
+        'classId': classId
       };
       let queryParams = {
       };
@@ -151,7 +151,7 @@ export default class CalendarApi {
       let accepts = ['application/json'];
       let returnType = CalendarDTO;
       return this.apiClient.callApi(
-        '/calendar/class/{className}', 'GET',
+        '/calendar/class/{classId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

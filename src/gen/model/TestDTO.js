@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The CourseDTO model module.
- * @module model/CourseDTO
+ * The TestDTO model module.
+ * @module model/TestDTO
  * @version 1.0.0
  */
-class CourseDTO {
+class TestDTO {
     /**
-     * Constructs a new <code>CourseDTO</code>.
-     * @alias module:model/CourseDTO
+     * Constructs a new <code>TestDTO</code>.
+     * @alias module:model/TestDTO
      */
     constructor() { 
         
-        CourseDTO.initialize(this);
+        TestDTO.initialize(this);
     }
 
     /**
@@ -37,18 +37,18 @@ class CourseDTO {
     }
 
     /**
-     * Constructs a <code>CourseDTO</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>TestDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/CourseDTO} obj Optional instance to populate.
-     * @return {module:model/CourseDTO} The populated <code>CourseDTO</code> instance.
+     * @param {module:model/TestDTO} obj Optional instance to populate.
+     * @return {module:model/TestDTO} The populated <code>TestDTO</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new CourseDTO();
+            obj = obj || new TestDTO();
 
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            if (data.hasOwnProperty('courseId')) {
+                obj['courseId'] = ApiClient.convertToType(data['courseId'], 'Number');
             }
             if (data.hasOwnProperty('start')) {
                 obj['start'] = ApiClient.convertToType(data['start'], 'Date');
@@ -56,8 +56,8 @@ class CourseDTO {
             if (data.hasOwnProperty('end')) {
                 obj['end'] = ApiClient.convertToType(data['end'], 'Date');
             }
-            if (data.hasOwnProperty('periodsOfTheWeek')) {
-                obj['periodsOfTheWeek'] = ApiClient.convertToType(data['periodsOfTheWeek'], ['Number']);
+            if (data.hasOwnProperty('text')) {
+                obj['text'] = ApiClient.convertToType(data['text'], 'String');
             }
         }
         return obj;
@@ -67,31 +67,32 @@ class CourseDTO {
 }
 
 /**
- * @member {String} name
+ * @member {Number} courseId
  */
-CourseDTO.prototype['name'] = undefined;
+TestDTO.prototype['courseId'] = undefined;
 
 /**
- * start of the course
+ * begin of the period
  * @member {Date} start
  */
-CourseDTO.prototype['start'] = undefined;
+TestDTO.prototype['start'] = undefined;
 
 /**
- * end of the course
+ * end of the period
  * @member {Date} end
  */
-CourseDTO.prototype['end'] = undefined;
+TestDTO.prototype['end'] = undefined;
 
 /**
- * @member {Array.<Number>} periodsOfTheWeek
+ * description of the test
+ * @member {String} text
  */
-CourseDTO.prototype['periodsOfTheWeek'] = undefined;
+TestDTO.prototype['text'] = undefined;
 
 
 
 
 
 
-export default CourseDTO;
+export default TestDTO;
 

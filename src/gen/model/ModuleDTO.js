@@ -50,6 +50,18 @@ class ModuleDTO {
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
+            if (data.hasOwnProperty('abbreviation')) {
+                obj['abbreviation'] = ApiClient.convertToType(data['abbreviation'], 'String');
+            }
+            if (data.hasOwnProperty('number')) {
+                obj['number'] = ApiClient.convertToType(data['number'], 'Number');
+            }
+            if (data.hasOwnProperty('period_number')) {
+                obj['period_number'] = ApiClient.convertToType(data['period_number'], 'Number');
+            }
+            if (data.hasOwnProperty('description')) {
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
+            }
         }
         return obj;
     }
@@ -61,6 +73,26 @@ class ModuleDTO {
  * @member {String} name
  */
 ModuleDTO.prototype['name'] = undefined;
+
+/**
+ * @member {String} abbreviation
+ */
+ModuleDTO.prototype['abbreviation'] = undefined;
+
+/**
+ * @member {Number} number
+ */
+ModuleDTO.prototype['number'] = undefined;
+
+/**
+ * @member {Number} period_number
+ */
+ModuleDTO.prototype['period_number'] = undefined;
+
+/**
+ * @member {String} description
+ */
+ModuleDTO.prototype['description'] = undefined;
 
 
 

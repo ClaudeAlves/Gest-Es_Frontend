@@ -88,6 +88,7 @@ export default {
       loginRequestDTO.password = this.password;
 
       this.$store.dispatch("actionLogin", loginRequestDTO);
+
     },
     methodShowError() {
       const loginState = this.$store.getters.getLogin;

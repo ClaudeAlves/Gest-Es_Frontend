@@ -62,6 +62,9 @@ class RegisterDTO {
             if (data.hasOwnProperty('lastname')) {
                 obj['lastname'] = ApiClient.convertToType(data['lastname'], 'String');
             }
+            if (data.hasOwnProperty('role')) {
+                obj['role'] = ApiClient.convertToType(data['role'], 'String');
+            }
         }
         return obj;
     }
@@ -93,6 +96,11 @@ RegisterDTO.prototype['firstname'] = undefined;
  * @member {String} lastname
  */
 RegisterDTO.prototype['lastname'] = undefined;
+
+/**
+ * @member {String} role
+ */
+RegisterDTO.prototype['role'] = undefined;
 
 
 

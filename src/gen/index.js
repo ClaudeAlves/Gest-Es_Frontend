@@ -15,20 +15,26 @@
 import ApiClient from './ApiClient';
 import ApiMessageDTO from './model/ApiMessageDTO';
 import CalendarDTO from './model/CalendarDTO';
+import ClassDTO from './model/ClassDTO';
 import CourseDTO from './model/CourseDTO';
+import HolidayDTO from './model/HolidayDTO';
 import LoginRequestDTO from './model/LoginRequestDTO';
 import LoginSuccessDTO from './model/LoginSuccessDTO';
+import MarkDTO from './model/MarkDTO';
 import ModuleDTO from './model/ModuleDTO';
+import PeriodDTO from './model/PeriodDTO';
 import RegisterDTO from './model/RegisterDTO';
 import RoleDTO from './model/RoleDTO';
 import SubjectDTO from './model/SubjectDTO';
+import TestDTO from './model/TestDTO';
 import UserDTO from './model/UserDTO';
 import UserModificationDTO from './model/UserModificationDTO';
 import UserSimpleDTO from './model/UserSimpleDTO';
 import AuthenticationApi from './api/AuthenticationApi';
 import CalendarApi from './api/CalendarApi';
 import CreationApi from './api/CreationApi';
-import MarkApi from './api/MarkApi';
+import EvaluationApi from './api/EvaluationApi';
+import OrganisationApi from './api/OrganisationApi';
 import UserApi from './api/UserApi';
 
 
@@ -83,10 +89,22 @@ export {
     CalendarDTO,
 
     /**
+     * The ClassDTO model constructor.
+     * @property {module:model/ClassDTO}
+     */
+    ClassDTO,
+
+    /**
      * The CourseDTO model constructor.
      * @property {module:model/CourseDTO}
      */
     CourseDTO,
+
+    /**
+     * The HolidayDTO model constructor.
+     * @property {module:model/HolidayDTO}
+     */
+    HolidayDTO,
 
     /**
      * The LoginRequestDTO model constructor.
@@ -101,10 +119,22 @@ export {
     LoginSuccessDTO,
 
     /**
+     * The MarkDTO model constructor.
+     * @property {module:model/MarkDTO}
+     */
+    MarkDTO,
+
+    /**
      * The ModuleDTO model constructor.
      * @property {module:model/ModuleDTO}
      */
     ModuleDTO,
+
+    /**
+     * The PeriodDTO model constructor.
+     * @property {module:model/PeriodDTO}
+     */
+    PeriodDTO,
 
     /**
      * The RegisterDTO model constructor.
@@ -123,6 +153,12 @@ export {
      * @property {module:model/SubjectDTO}
      */
     SubjectDTO,
+
+    /**
+     * The TestDTO model constructor.
+     * @property {module:model/TestDTO}
+     */
+    TestDTO,
 
     /**
      * The UserDTO model constructor.
@@ -161,10 +197,16 @@ export {
     CreationApi,
 
     /**
-    * The MarkApi service constructor.
-    * @property {module:api/MarkApi}
+    * The EvaluationApi service constructor.
+    * @property {module:api/EvaluationApi}
     */
-    MarkApi,
+    EvaluationApi,
+
+    /**
+    * The OrganisationApi service constructor.
+    * @property {module:api/OrganisationApi}
+    */
+    OrganisationApi,
 
     /**
     * The UserApi service constructor.

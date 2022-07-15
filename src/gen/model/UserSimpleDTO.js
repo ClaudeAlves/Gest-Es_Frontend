@@ -56,9 +56,6 @@ class UserSimpleDTO {
             if (data.hasOwnProperty('lastname')) {
                 obj['lastname'] = ApiClient.convertToType(data['lastname'], 'String');
             }
-            if (data.hasOwnProperty('birthdate')) {
-                obj['birthdate'] = ApiClient.convertToType(data['birthdate'], 'Date');
-            }
             if (data.hasOwnProperty('email')) {
                 obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
@@ -83,11 +80,6 @@ UserSimpleDTO.prototype['firstname'] = undefined;
  * @member {String} lastname
  */
 UserSimpleDTO.prototype['lastname'] = undefined;
-
-/**
- * @member {Date} birthdate
- */
-UserSimpleDTO.prototype['birthdate'] = undefined;
 
 /**
  * @member {String} email

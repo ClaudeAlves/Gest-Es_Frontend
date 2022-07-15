@@ -14,7 +14,9 @@
 
 import ApiClient from "../ApiClient";
 import ApiMessageDTO from '../model/ApiMessageDTO';
+import ClassDTO from '../model/ClassDTO';
 import CourseDTO from '../model/CourseDTO';
+import HolidayDTO from '../model/HolidayDTO';
 import ModuleDTO from '../model/ModuleDTO';
 import SubjectDTO from '../model/SubjectDTO';
 
@@ -36,6 +38,46 @@ export default class CreationApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the createClass operation.
+     * @callback module:api/CreationApi~createClassCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/ApiMessageDTO} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * create class.
+     * This endpoint is used to create a class(group of students)
+     * @param {Object} opts Optional parameters
+     * @param {module:model/ClassDTO} opts.classDTO 
+     * @param {module:api/CreationApi~createClassCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/ApiMessageDTO}
+     */
+    createClass(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['classDTO'];
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = ApiMessageDTO;
+      return this.apiClient.callApi(
+        '/creation/class', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the createCourse operation.
@@ -72,6 +114,46 @@ export default class CreationApi {
       let returnType = ApiMessageDTO;
       return this.apiClient.callApi(
         '/creation/course', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the createHoliday operation.
+     * @callback module:api/CreationApi~createHolidayCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/ApiMessageDTO} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * create holiday.
+     * This endpoint is used to create a period of holiday.
+     * @param {Object} opts Optional parameters
+     * @param {module:model/HolidayDTO} opts.holidayDTO 
+     * @param {module:api/CreationApi~createHolidayCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/ApiMessageDTO}
+     */
+    createHoliday(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['holidayDTO'];
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = ApiMessageDTO;
+      return this.apiClient.callApi(
+        '/creation/holiday', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

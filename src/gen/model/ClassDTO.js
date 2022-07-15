@@ -12,21 +12,20 @@
  */
 
 import ApiClient from '../ApiClient';
-import PeriodDTO from './PeriodDTO';
 
 /**
- * The CalendarDTO model module.
- * @module model/CalendarDTO
+ * The ClassDTO model module.
+ * @module model/ClassDTO
  * @version 1.0.0
  */
-class CalendarDTO {
+class ClassDTO {
     /**
-     * Constructs a new <code>CalendarDTO</code>.
-     * @alias module:model/CalendarDTO
+     * Constructs a new <code>ClassDTO</code>.
+     * @alias module:model/ClassDTO
      */
     constructor() { 
         
-        CalendarDTO.initialize(this);
+        ClassDTO.initialize(this);
     }
 
     /**
@@ -38,18 +37,21 @@ class CalendarDTO {
     }
 
     /**
-     * Constructs a <code>CalendarDTO</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>ClassDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/CalendarDTO} obj Optional instance to populate.
-     * @return {module:model/CalendarDTO} The populated <code>CalendarDTO</code> instance.
+     * @param {module:model/ClassDTO} obj Optional instance to populate.
+     * @return {module:model/ClassDTO} The populated <code>ClassDTO</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new CalendarDTO();
+            obj = obj || new ClassDTO();
 
-            if (data.hasOwnProperty('periods')) {
-                obj['periods'] = ApiClient.convertToType(data['periods'], [PeriodDTO]);
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
+            if (data.hasOwnProperty('comment')) {
+                obj['comment'] = ApiClient.convertToType(data['comment'], 'String');
             }
         }
         return obj;
@@ -59,14 +61,19 @@ class CalendarDTO {
 }
 
 /**
- * @member {Array.<module:model/PeriodDTO>} periods
+ * @member {String} name
  */
-CalendarDTO.prototype['periods'] = undefined;
+ClassDTO.prototype['name'] = undefined;
+
+/**
+ * @member {String} comment
+ */
+ClassDTO.prototype['comment'] = undefined;
 
 
 
 
 
 
-export default CalendarDTO;
+export default ClassDTO;
 

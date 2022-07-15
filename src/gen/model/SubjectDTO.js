@@ -50,6 +50,9 @@ class SubjectDTO {
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
+            if (data.hasOwnProperty('abbreviation')) {
+                obj['abbreviation'] = ApiClient.convertToType(data['abbreviation'], 'String');
+            }
         }
         return obj;
     }
@@ -61,6 +64,11 @@ class SubjectDTO {
  * @member {String} name
  */
 SubjectDTO.prototype['name'] = undefined;
+
+/**
+ * @member {String} abbreviation
+ */
+SubjectDTO.prototype['abbreviation'] = undefined;
 
 
 

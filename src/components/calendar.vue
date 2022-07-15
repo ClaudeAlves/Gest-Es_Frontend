@@ -11,9 +11,21 @@
 
 <script>
 import {DayPilot, DayPilotCalendar, DayPilotNavigator} from '@daypilot/daypilot-lite-vue'
+import Calendar from "@/state/module/calendar";
+import calendar from "@/state/module/calendar";
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Calendar',
+  name: 'Calendar',/*
+  props: {
+    eventsToAdd: Array
+  },
+  watch: {
+    '$store.state.calendar.data.Events': function() {
+      console.log(this.$store.getters.getMyCalendarEvents)
+    },
+
+  },*/
   data: function() {
     return {
       events: [],
@@ -29,6 +41,8 @@ export default {
         startDate: DayPilot.today,
         viewType: "Week",
         timeFormat: "EU-eu",
+        eventResizeHandling: "Disabled",
+        eventMoveHandling: "Disabled",
       },
     }
   },
@@ -38,13 +52,21 @@ export default {
   },
   methods: {
     loadEvents() {
-      // placeholder for an HTTP call
-      this.events = this.$store.getters.getCalendar.data.MyEvents;
-    },
+      console.log("loadevents")
+      this.events = this.$store.getters.getCalendar
+      console.log(this.events)
+      this.calendar.update(this.events)
+    }
+  },
+  computed : {
+    calendar() {
+      return this.$refs.calendar.control;
+    }
+
   },
   mounted() {
     this.loadEvents();
-  }
+  },
 }
 </script>
 

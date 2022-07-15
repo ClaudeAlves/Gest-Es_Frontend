@@ -18,10 +18,8 @@ tags:
     description: Operation related to user
   - name: calendar
     description: Operation related to the calendar
-  - name: test
-    description: Operation related to the tests
-  - name: mark
-    description: Operations related to the marks
+  - name: evaluation
+    description: Operations related to evaluation (test, marks, grades)
   - name: absence
     description: Operations related to the absences
   - name: creation
@@ -226,7 +224,8 @@ paths:
         - in: path
           name: userId
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -246,7 +245,8 @@ paths:
         - in: path
           name: classId
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -256,32 +256,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/CalendarDTO'
   ## evaluation endpoints ##
-  /marks/{idStudent}:
-    get:
-      tags:
-        - mark
-      description: This endpoint is used to get the marks of a student
-      summary: Get marks.
-      operationId: getStudentMarks
-      parameters:
-        - in: path
-          name: idStudent
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Get student marks successfully.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: integer
   /evluation/test:
     post:
       tags:
-        - test
+        - evaluation
       description: This endpoint is used to create a test
       summary: create test
       operationId: createTest
@@ -289,7 +267,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseDTO'
+              $ref: '#/components/schemas/TestDTO'
       responses:
         '201':
           description: Creation successful.
@@ -297,21 +275,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiMessageDTO'
-  /evaluation/tests/{idCourse}/student/{idStudent}:
+  /evaluation/mark:
+    post:
+      tags:
+        - evaluation
+      description: This endpoint is used to set a mark for a student on a specific test.
+      summary: Notes a student test.
+      operationId: noteStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkDTO'
+      responses:
+        '201':
+          description: Creation successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageDTO'
+  /evaluation/marks/{idCourse}/student/{idStudent}:
     get:
       tags:
-        - test
-      description: Get the t
+        - evaluation
+      description: Get the tests of a student for a specific course.
+      operationId: getStudentTests
       parameters:
         - in: path
           name: idCourse
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idStudent
           schema:
-            type: string
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Get student test successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestDTO"
+  /evaluation/grades/{idStudent}:
+    get:
+      tags:
+        - evaluation
+      description: Get the grades of a student.
+      operationId: getGrades
+      parameters:
+        - in: path
+          name: idStudent
+          schema:
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -333,12 +353,14 @@ paths:
         - in: path
           name: idModule
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idStudent
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -363,12 +385,14 @@ paths:
         - in: path
           name: idSubject
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idStudent
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -393,12 +417,14 @@ paths:
         - in: path
           name: idClass
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idStudent
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -423,12 +449,14 @@ paths:
         - in: path
           name: idModule
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idSubject
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -453,12 +481,14 @@ paths:
         - in: path
           name: idSubject
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idCourse
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -483,12 +513,14 @@ paths:
         - in: path
           name: idCourse
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idClass
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -508,17 +540,19 @@ paths:
       tags:
         - organisation
       description: Adds a teacher to a course.
-      operationId: teacherToClass
+      operationId: teacherToCourse
       parameters:
         - in: path
           name: idCourse
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
         - in: path
           name: idTeacher
           schema:
-            type: string
+            type: integer
+            format: int64
           required: true
       responses:
         '200':
@@ -534,6 +568,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiMessageDTO'
   ## creation endpoints ##
+  /creation/class:
+    post:
+      tags:
+        - creation
+      description: This endpoint is used to create a class(group of students)
+      summary: create class.
+      operationId: createClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassDTO'
+      responses:
+        '201':
+          description: Creation successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageDTO'
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageDTO'
   /creation/course:
     post:
       tags:
@@ -674,6 +733,8 @@ components:
         lastname:
           type: string
           example: 'Dupont'
+        role:
+          type: string
     # Login
     LoginRequestDTO:
       title: LoginRequestDTO
@@ -704,6 +765,7 @@ components:
       properties:
         id:
           type: integer
+          format: int64
           example: 1
         name:
           type: string
@@ -714,6 +776,7 @@ components:
       properties:
         idUser:
           type: integer
+          format: int64
         username:
           type: string
         firstname:
@@ -734,15 +797,13 @@ components:
       properties:
         idUser:
           type: integer
+          format: int64
         username:
           type: string
         firstname:
           type: string
         lastname:
           type: string
-        birthdate:
-          type: string
-          format: date
         email:
           type: string
         password:
@@ -757,9 +818,6 @@ components:
           type: string
         lastname:
           type: string
-        birthdate:
-          type: string
-          format: date
         email:
           type: string
     # Organisation
@@ -769,17 +827,49 @@ components:
       properties:
         name:
           type: string
+        start:
+          type: string
+          format: date
+          description: start of the course
+          example: "2022-03-12"
+        end:
+          type: string
+          format: date
+          description: end of the course
+          example: "2022-06-12"
+        periodsOfTheWeek:
+          type: array
+          items:
+            type: integer
     ModuleDTO:
       title: ModuleDTO
       type: object
       properties:
         name:
           type: string
+        abbreviation:
+          type: string
+        number:
+          type: integer
+        period_number:
+          type: integer
+        description:
+          type: string
     SubjectDTO:
       title: SubjectDTO
       type: object
       properties:
         name:
+          type: string
+        abbreviation:
+          type: string
+    ClassDTO:
+      title: ClassDTO
+      type: object
+      properties:
+        name:
+          type: string
+        comment:
           type: string
     # Calendar
     CalendarDTO:
@@ -813,6 +903,7 @@ components:
       properties:
         id:
           type: integer
+          format: int64
         tag:
           type: string
         start:
@@ -835,6 +926,7 @@ components:
       properties:
         courseId:
           type: integer
+          format: int64
         start:
           type: string
           format: date-time
@@ -847,15 +939,20 @@ components:
           example: "2021-01-30T08:30:00Z"
         text:
           type: string
-          description: description of the period
+          description: description of the test
     MarkDTO:
       title: MarkDTO
       type: object
       properties:
         testId:
           type: integer
+          format: int64
         studentId:
           type: integer
+          format: int64
         value:
           type: integer
+          format: double
+          minimum: 1
+          maximum: 6
 
