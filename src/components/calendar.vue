@@ -1,12 +1,17 @@
 <template>
-  <div class="wrap">
-    <div class="left">
-      <DayPilotNavigator id="nav" :config="navigatorConfig" :events="events" />
+  <v-container>
+    <div class="wrap">
+      <div class="left">
+        <DayPilotNavigator id="nav" :config="navigatorConfig" :events="events" />
+      </div>
+      <div class="content">
+        <DayPilotCalendar id="dp" :config="config" ref="calendar" :events="events" />
+      </div>
     </div>
-    <div class="content">
-      <DayPilotCalendar id="dp" :config="config" ref="calendar" :events="events" />
-    </div>
-  </div>
+  </v-container>
+
+
+
 </template>
 
 <script>
@@ -16,19 +21,9 @@ import calendar from "@/state/module/calendar";
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Calendar',/*
-  props: {
-    eventsToAdd: Array
-  },
-  watch: {
-    '$store.state.calendar.data.Events': function() {
-      console.log(this.$store.getters.getMyCalendarEvents)
-    },
-
-  },*/
+  name: 'calendar',
   data: function() {
     return {
-      events: [],
       navigatorConfig: {
         showMonths: 1,
         skipMonths: 1,
@@ -43,6 +38,7 @@ export default {
         timeFormat: "EU-eu",
         eventResizeHandling: "Disabled",
         eventMoveHandling: "Disabled",
+
       },
     }
   },
@@ -52,13 +48,14 @@ export default {
   },
   methods: {
     loadEvents() {
-      console.log("loadevents")
-      this.events = this.$store.getters.getCalendar
-      console.log(this.events)
+      // console.log({...this.events})
       this.calendar.update(this.events)
     }
   },
   computed : {
+    ...mapGetters({
+      events: 'getCalendar'
+    }),
     calendar() {
       return this.$refs.calendar.control;
     }
@@ -66,7 +63,7 @@ export default {
   },
   mounted() {
     this.loadEvents();
-  },
+  }
 }
 </script>
 

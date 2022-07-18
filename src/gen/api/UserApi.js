@@ -14,6 +14,8 @@
 
 import ApiClient from "../ApiClient";
 import ApiMessageDTO from '../model/ApiMessageDTO';
+import ClassDTO from '../model/ClassDTO';
+import CourseDTO from '../model/CourseDTO';
 import UserDTO from '../model/UserDTO';
 import UserModificationDTO from '../model/UserModificationDTO';
 import UserSimpleDTO from '../model/UserSimpleDTO';
@@ -118,10 +120,170 @@ export default class UserApi {
     }
 
     /**
+     * Callback function to receive the result of the getClasses operation.
+     * @callback module:api/UserApi~getClassesCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/ClassDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get Classes
+     * This endpoint serves a teacher to get his classes
+     * @param {module:api/UserApi~getClassesCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/ClassDTO>}
+     */
+    getClasses(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [ClassDTO];
+      return this.apiClient.callApi(
+        '/teacher/classes', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getClassesFromCourse operation.
+     * @callback module:api/UserApi~getClassesFromCourseCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/ClassDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get classes from course.
+     * This endpoint serves to get the classes who participate in a specific course.
+     * @param {Number} idCourse 
+     * @param {module:api/UserApi~getClassesFromCourseCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/ClassDTO>}
+     */
+    getClassesFromCourse(idCourse, callback) {
+      let postBody = null;
+      // verify the required parameter 'idCourse' is set
+      if (idCourse === undefined || idCourse === null) {
+        throw new Error("Missing the required parameter 'idCourse' when calling getClassesFromCourse");
+      }
+
+      let pathParams = {
+        'idCourse': idCourse
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [ClassDTO];
+      return this.apiClient.callApi(
+        '/teacher/classes/course/{idCourse}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getCourses operation.
+     * @callback module:api/UserApi~getCoursesCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/CourseDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get courses.
+     * This endpoint serves to get a user courses.
+     * @param {module:api/UserApi~getCoursesCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/CourseDTO>}
+     */
+    getCourses(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [CourseDTO];
+      return this.apiClient.callApi(
+        '/user/courses', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getStudentsFromCourse operation.
+     * @callback module:api/UserApi~getStudentsFromCourseCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/UserSimpleDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get students from course.
+     * This endpoint serves to get the students of a specific course.
+     * @param {Number} idCourse 
+     * @param {module:api/UserApi~getStudentsFromCourseCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/UserSimpleDTO>}
+     */
+    getStudentsFromCourse(idCourse, callback) {
+      let postBody = null;
+      // verify the required parameter 'idCourse' is set
+      if (idCourse === undefined || idCourse === null) {
+        throw new Error("Missing the required parameter 'idCourse' when calling getStudentsFromCourse");
+      }
+
+      let pathParams = {
+        'idCourse': idCourse
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [UserSimpleDTO];
+      return this.apiClient.callApi(
+        '/teacher/students/{idCourse}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the getUser operation.
      * @callback module:api/UserApi~getUserCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/UserDTO} data The data returned by the service call.
+     * @param {module:model/UserSimpleDTO} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -130,7 +292,7 @@ export default class UserApi {
      * This private endpoint is used to get one user.
      * @param {String} username 
      * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/UserDTO}
+     * data is of type: {@link module:model/UserSimpleDTO}
      */
     getUser(username, callback) {
       let postBody = null;
@@ -152,7 +314,7 @@ export default class UserApi {
       let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = UserDTO;
+      let returnType = UserSimpleDTO;
       return this.apiClient.callApi(
         '/users/{username}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,

@@ -1,46 +1,82 @@
 <template>
-	<div>
-    <div class="navbar">
-      <div class="logo">
+	<nav>
+    <v-app-bar flat app color="teal">
+      <v-toolbar-title class="text-uppercase text--darken-4 red--text">
         Gest-ES
-      </div>
-      <div class="nav-elements">
-        <router-link v-if="this.isNotLoggedIn"
+      </v-toolbar-title>
+      <v-spacer/>
+      <v-btn text v-if="this.isNotLoggedIn">
+        <router-link
                      tag="div"
-                     class="nav-link"
-                     to="/login">
-          Connexion
+                     to="/login"
+        >
+            Connexion
         </router-link>
-        <router-link v-if="this.isNotLoggedIn"
-                     tag="div"
-                     to="/forgot-password"
-                     class="nav-link">
+      </v-btn>
+      <v-btn text v-if="this.isNotLoggedIn">
+        <router-link
+                   tag="div"
+                   to="/forgot-password"
+        >
           Mot de passe oublié?
         </router-link>
-        <router-link v-if="this.isLoggedIn"
-                     tag="div"
-                     to="/profile"
-                     class="nav-link">
+      </v-btn>
+      <v-btn text v-if="this.isLoggedIn">
+        <router-link
+                   tag="div"
+                   to="/profile"
+        >
           Profile
         </router-link>
-        <router-link v-if="this.isLoggedIn"
-                     tag="div"
-                     to="/home"
-                     class="nav-link">
-          Calendar
+      </v-btn>
+      <v-btn text v-if="this.isLoggedIn && !isAdmin">
+        <router-link
+                   tag="div"
+                   to="/selfCalendar"
+        >
+          Calendrier
         </router-link>
-        <router-link to="/">
-          <div v-if="this.isLoggedIn"
-               @click="logoutMethod"
-               class="nav-link">
-            Déconnexion
-          </div></router-link>
-      </div>
-      <div v-if="this.isLoggedIn" class="nav-bar-user">
+      </v-btn>
+      <v-btn text v-if="this.isLoggedIn && !this.isStudent">
+        <router-link
+                   tag="div"
+                   to="/calendars"
+        >
+          Horaires
+        </router-link>
+      </v-btn>
+      <v-menu offset-y text v-if="this.isLoggedIn && !this.isStudent">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn text
+              v-bind="attrs"
+              v-on="on"
+          >
+            Tests
+          </v-btn>
+        </template>
+          <v-list class="teal lighten-4">
+            <v-list-item>
+              <v-btn text>
+                <router-link tag="div" to="/testCreation">Créer un test</router-link>
+              </v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn text>
+              <router-link tag="div" to="/tests">Editer mes tests</router-link>
+            </v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      <v-spacer></v-spacer>
+      <v-btn text @click="logoutMethod" v-if="this.isLoggedIn">
+        <router-link tag="div" to="/">Déconnexion</router-link>
+      </v-btn>
+
+      <div v-if="this.isLoggedIn">
         current user : {{ this.$store.getters.getLogin.data.username }}
       </div>
-    </div>
-  </div>
+    </v-app-bar>
+  </nav>
 </template>
 
 <style>
@@ -52,6 +88,9 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn
+    },
+    isStudent() {
+      return !(this.isTeacher || this.isAdmin);
     },
     isTeacher() {
       return this.$store.getters.isTeacher

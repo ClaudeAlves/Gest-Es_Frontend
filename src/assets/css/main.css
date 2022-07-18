@@ -21,6 +21,21 @@
     box-shadow: 0.1px 0.1px 15px 0.1px #273c75;
 }
 
+.nav-button {
+    border-radius: 10px;
+    border: 2px black;
+    color: black;
+    font-size: x-large;
+    padding: 10px 10px 10px;
+    margin: 10px;
+    background: cadetblue;
+    box-shadow: 0px 0px 5px #273c75;
+    text-decoration: none;
+}
+.nav-button:hover {
+    background: aliceblue;
+}
+
 .nav-link {
     font-size: x-large;
     padding: 10px;

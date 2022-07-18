@@ -17,6 +17,7 @@ import ApiMessageDTO from './model/ApiMessageDTO';
 import CalendarDTO from './model/CalendarDTO';
 import ClassDTO from './model/ClassDTO';
 import CourseDTO from './model/CourseDTO';
+import GradeDTO from './model/GradeDTO';
 import HolidayDTO from './model/HolidayDTO';
 import LoginRequestDTO from './model/LoginRequestDTO';
 import LoginSuccessDTO from './model/LoginSuccessDTO';
@@ -99,6 +100,12 @@ export {
      * @property {module:model/CourseDTO}
      */
     CourseDTO,
+
+    /**
+     * The GradeDTO model constructor.
+     * @property {module:model/GradeDTO}
+     */
+    GradeDTO,
 
     /**
      * The HolidayDTO model constructor.

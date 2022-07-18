@@ -1,57 +1,52 @@
 <template>
-  <div class="container">
-    <div class="row valign-wrapper">
-      <md-card>
-        <md-card-content>
-          <form v-on:submit.prevent="methodLogin">
-            <div class="login-title">
-              <h3 class="title">Connexion</h3>
-            </div>
-            <div class="form-group">
-              <md-field>
-                <label>Nom d'utilisateur ou E-mail</label>
-                <md-input
-                    data-ruid="login"
-                    v-model="usernameOrEmail"
-                    id="login"
-                    class="form-control form-control-lg"
-                />
-              </md-field>
-            </div>
+  <v-app>
+    <v-container fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md4>
+          <v-card elevation="2">
 
-            <div class="form-group">
-              <md-field>
-                <label>Mot de passe</label>
-                <md-input
-                    data-ruid="password"
+              <v-toolbar dark color="teal">
+                <v-toolbar-title>Connexion</v-toolbar-title>
+              </v-toolbar>
+
+              <form v-on:submit.prevent="methodLogin">
+                <v-container class="text-left">
+                  <v-text-field
+                      v-model="usernameOrEmail"
+                      label="Nom d'utilisateur ou E-mail"
+                      type="text"
+                  ></v-text-field>
+              </v-container>
+
+              <v-container class="text-left">
+                <v-text-field
                     v-model="password"
+                    label="Password"
                     type="password"
-                    id="password"
-                    class="form-control form-control-lg"
-                />
-              </md-field>
-            </div>
+                ></v-text-field>
 
-            <div class="main-title">
-              <v-btn
-                  type="submit"
-                  class="button-general"
-                  data-ruid="loginButton"
-                  color="#5ee4cc"
-              >
-                Connexion
-                {{
-                  this.$store.getters.getLogin.state === "WAITING"
-                      ? "..."
-                      : ""
-                }}
-              </v-btn>
-            </div>
-          </form>
-        </md-card-content>
-      </md-card>
-    </div>
-  </div>
+              </v-container>
+
+              <v-container class="text-center">
+                <v-btn
+                    type="submit"
+                    class="button-general"
+                    color="teal"
+                >
+                  Connexion
+                  {{
+                    this.$store.getters.getLogin.state === "WAITING"
+                        ? "..."
+                        : ""
+                  }}
+                </v-btn>
+              </v-container>
+            </form>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-app>
 </template>
 
 <style>
@@ -72,7 +67,6 @@
 
 <script>
 import LoginRequestDTO from "@/gen/model/LoginRequestDTO";
-import States from "@/state/States";
 
 export default {
   data() {
@@ -89,15 +83,7 @@ export default {
 
       this.$store.dispatch("actionLogin", loginRequestDTO);
 
-    },
-    methodShowError() {
-      const loginState = this.$store.getters.getLogin;
-      if (loginState.state === States.ERROR) {
-        return loginState.message;
-      } else {
-        return "";
-      }
-    },
+    }
   },
 };
 </script>

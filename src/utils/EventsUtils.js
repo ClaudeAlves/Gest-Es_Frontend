@@ -2,12 +2,15 @@ export default {
     convertPeriodsToEvents(array) {
         let toReturn = [];
         for(let i = 0; i < array.length; i++) {
+            let color = array[i].tag.includes("test") ? "IndianRed" : "DarkSeaGreen"
             toReturn.push(
                 {
                     "id": array[i].id,
                     "start": this.formatDateFromBackend(array[i].start),
                     "end": this.formatDateFromBackend(array[i].end),
-                    "text": array[i].tag
+                    "text": array[i].tag,
+                    "backColor": color,
+                    "barColor": color,
                 }
             )
         }

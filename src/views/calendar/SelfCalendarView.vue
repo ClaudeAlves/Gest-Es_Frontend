@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <div class="wrap">
-      <h1 class ="page-title">
+  <v-card>
+      <v-card-title class ="page-title">
         Calendrier personnel
-      </h1>
-    </div>
-    <calendar v-if=this.$store.getters.isCalendarDisplayable class="calendar-div"/>
-  </div>
+      </v-card-title>
+    <calendar class="calendar-div"/>
+  </v-card>
 </template>
 <script>
 import Calendar from "@/components/calendar";
+import {mapGetters} from "vuex";
+
 export default {
   /*
   data() {
@@ -31,6 +31,9 @@ export default {
       console.log("NNNNNNNNNNNNNN")
     })*/
 
+  },
+  mounted() {
+    //this.$store.dispatch('actionCalendarNotDisplayable')
   },
   components: {Calendar}
 }

@@ -1,14 +1,9 @@
 import States from "@/state/States";
 import Notifications from "@/utils/Notifications";
-import {CalendarApi} from "@/gen";
+import {CalendarApi, EvaluationApi} from "@/gen";
 import StateHelper from "@/state/StateHelper";
 import EventsUtils from "@/utils/EventsUtils";
 
-function calendarInitialState() {
-       return {
-
-       }
-}
 const calendar = {
     state: () => ({
         calendar: {
@@ -62,16 +57,32 @@ const calendar = {
             });
         },
         actionLogout({commit}) {
-            commit('mutationLogoutSuccess');
+            commit('mutationIsDisplayable');
+        },
+        actionCalendarNotDisplayable({commit}) {
+            commit('mutationIsDisplayable');
         },
         actionGetClassCalendar({commit}, idClass) {
             commit('mutationGetCalendarWaiting', {});
-            const api = new CalendarApi();
-            api.getClassCalendar(idClass, (e, d, /* eslint-disable */r/* eslint-enable */) => {
-                if (e) {
-                    StateHelper.simpleErrorManagement(e, 'mutationGetCalendarError', commit);
+            const calendarApi = new CalendarApi();
+            const evaluationApi = new EvaluationApi();
+            calendarApi.getClassCalendar(idClass, (eCal, dCal, rCal) => {
+                if (eCal) {
+                    StateHelper.simpleErrorManagement(eCal, 'mutationGetCalendarError', commit);
                 } else {
-                    commit('mutationGetCalendarSuccess', { ...d });
+                    commit('mutationGetCalendarWaiting', {});
+                    evaluationApi.getClassTests(idClass, (eTest, dTest, rTest) => {
+                        if( eTest) {
+                            StateHelper.simpleErrorManagement(eTest, 'mutationGetTestCalendarError', commit);
+                        } else {
+                            /*dTest.forEach(test => {
+                                dCal.periods.push(test)
+                            })*/
+                            console.log("before COMMIT mutationGetCalendarSuccess");
+                            console.log({...dCal})
+                            commit('mutationGetCalendarSuccess', { ...dCal});
+                        }
+                    })
                 }
             });
         }
@@ -98,10 +109,7 @@ const calendar = {
         },
         mutationGetMyCalendarSuccess(state, data) {
             state.calendar.state = States.SUCCESS;
-            //console.log(data.periods)
             state.calendar.data.Events = EventsUtils.convertPeriodsToEvents(data.periods);
-            //console.log(EventsUtils.convertPeriodsToEvents(data.periods))
-            //console.log("DATA IN GETMYCALENDAR " + JSON.stringify(state.calendar.data.MyEvents))
             state.calendar.isDisplayable = true;
             Notifications.debug("My Calendar", "Loaded Successfully.");
         },
@@ -117,22 +125,8 @@ const calendar = {
             state.calendar.isDisplayable = false;
             Notifications.error("Erreur de Chargement", data.message);
         },
-        mutationLogoutSuccess(state, data) {
+        mutationIsDisplayable(state, data) {
             state.calendar.isDisplayable = false;
-        },
-        // Update Calendar
-        mutationUpdateCalendarWaiting(state, data) {
-            state.calendar.state = States.WAITING;
-        },
-        mutationUpdateCalendarSuccess(state, data) {
-            state.calendar.state = States.SUCCESS;
-            state.calendar.data = {...data};
-            Notifications.success("Modification Réussie", "Votre calendrier a été mis à jour.");
-        },
-        mutationUpdateCalendarError(state, data) {
-            state.calendar.state = States.ERROR;
-            state.calendar.message = data.message;
-            Notifications.error("Erreur de Modification", data.message);
         },
     }
 }

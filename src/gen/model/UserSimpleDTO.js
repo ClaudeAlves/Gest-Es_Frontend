@@ -47,6 +47,9 @@ class UserSimpleDTO {
         if (data) {
             obj = obj || new UserSimpleDTO();
 
+            if (data.hasOwnProperty('id')) {
+                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
+            }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
@@ -65,6 +68,11 @@ class UserSimpleDTO {
 
 
 }
+
+/**
+ * @member {Number} id
+ */
+UserSimpleDTO.prototype['id'] = undefined;
 
 /**
  * @member {String} username

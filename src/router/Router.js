@@ -12,9 +12,9 @@ const routes = [
 
     },
     {
-        path: "/test",
-        nam: "test",
-        component: () => import("../views/UserInfos.vue")
+        path: "/calendars",
+        name: "calendars",
+        component: () => import("../views/calendar/PickCalendar")
     },
     {
         path: "/forgot-password",
@@ -22,13 +22,32 @@ const routes = [
         component: () => import("../views/login/ForgotPassword.vue")
     },
     {
-        path: "/home",
-        name: "home",
-        component: () => import("../views/HomeView.vue"),
+        path: "/selfCalendar",
+        name: "selfCalendar",
+        component: () => import("../views/calendar/SelfCalendarView.vue"),
         meta: {
             requiresAuth: true,
         }
     },
+    {
+        path: "/tests",
+        name: "tests",
+        component: () => import("../views/Evaluation/TestsMarksView.vue"),
+        props: true,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        path: "/testCreation",
+        name: "testCreation",
+        component: () => import("../views/Evaluation/CreateTestVue.vue"),
+        props: true,
+        meta: {
+            requiresAuth: true,
+        }
+    }
+    ,
     {
         path: "/profile",
         name: "userprofile",

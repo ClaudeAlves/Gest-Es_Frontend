@@ -109,7 +109,7 @@ paths:
   /admin/users:
     get:
       tags:
-        - User
+        - user
       description: This private endpoint is used to get all users.
       summary: Get all users.
       operationId: getUsers
@@ -124,7 +124,7 @@ paths:
                   $ref: '#/components/schemas/UserSimpleDTO'
     delete:
       tags:
-        - User
+        - user
       description: This private endpoint is used to remove all users.
       summary: Delete all users.
       operationId: deleteUsers
@@ -138,7 +138,7 @@ paths:
   /users/{username}:
     get:
       tags:
-        - User
+        - user
       description: This private endpoint is used to get one user.
       summary: Get a specific user.
       operationId: getUser
@@ -154,10 +154,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: '#/components/schemas/UserSimpleDTO'
     put:
       tags:
-        - User
+        - user
       description: This private endpoint is used to modify one user.
       summary: Update a specific user.
       operationId: updateUser
@@ -181,7 +181,7 @@ paths:
                 $ref: '#/components/schemas/UserDTO'
     delete:
       tags:
-        - User
+        - user
       description: This private endpoint is used to remove one user.
       summary: Delete a specific user.
       operationId: deleteUser
@@ -198,6 +198,84 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiMessageDTO'
+  /teacher/classes:
+    get:
+      tags:
+        - user
+      description: This endpoint serves a teacher to get his classes
+      summary: Get Classes
+      operationId: getClasses
+      responses:
+        '200':
+          description: Get courses successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassDTO'
+  /teacher/students/{idCourse}:
+    get:
+      tags:
+        - user
+      description: This endpoint serves to get the students of a specific course.
+      summary: Get students from course.
+      operationId: getStudentsFromCourse
+      parameters:
+        - in: path
+          name: idCourse
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Get students id successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserSimpleDTO'
+  /teacher/classes/course/{idCourse}:
+    get:
+      tags:
+        - user
+      description: This endpoint serves to get the classes who participate in a specific course.
+      summary: Get classes from course.
+      operationId: getClassesFromCourse
+      parameters:
+        - in: path
+          name: idCourse
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Get classes successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClassDTO'
+  /user/courses:
+    get:
+      tags:
+        - user
+      description: This endpoint serves to get a user courses.
+      summary: Get courses.
+      operationId: getCourses
+      responses:
+        '200':
+          description: Get courses successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseDTO'
   ## calendar endpoints ##
   /calendar:
     get:
@@ -256,7 +334,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CalendarDTO'
   ## evaluation endpoints ##
-  /evluation/test:
+  /evaluation/test:
     post:
       tags:
         - evaluation
@@ -319,7 +397,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TestDTO"
+                type: array
+                items:
+                  $ref: "#/components/schemas/TestDTO"
   /evaluation/grades/{idStudent}:
     get:
       tags:
@@ -335,13 +415,72 @@ paths:
           required: true
       responses:
         '200':
-          description: Get student test successfully.
+          description: Get grades successfully.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: integer
+                  $ref: '#/components/schemas/GradeDTO'
+  /evaluation/tests/classes/{idClass}:
+    get:
+      tags:
+        - evaluation
+      description: Get the tests for a specific class.
+      operationId: getClassTests
+      parameters:
+        - in: path
+          name: idClass
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Get tests successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PeriodDTO'
+  /evaluation/tests/user/{idUser}:
+    get:
+      tags:
+        - evaluation
+      description: Get the tests for a specific user.
+      operationId: getTests
+      parameters:
+        - in: path
+          name: idUser
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Get tests successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PeriodDTO'
+  /evaluation/tests:
+    get:
+      tags:
+        - evaluation
+      description: Get the tests for the user.
+      operationId: getTestsUser
+      responses:
+        '200':
+          description: Get tests successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PeriodDTO'
   ## organisation endpoints ##
   /organisation/module/{idModule}/student/{idStudent}:
     put:
@@ -812,6 +951,9 @@ components:
       title: UserSimpleDTO
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         username:
           type: string
         firstname:
@@ -825,18 +967,19 @@ components:
       title: CourseDTO
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         start:
           type: string
           format: date
           description: start of the course
-          example: "2022-03-12"
         end:
           type: string
           format: date
           description: end of the course
-          example: "2022-06-12"
         periodsOfTheWeek:
           type: array
           items:
@@ -867,6 +1010,9 @@ components:
       title: ClassDTO
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         comment:
@@ -886,14 +1032,12 @@ components:
       properties:
         start:
           type: string
-          format: date-time
+          format: date
           description: begin of the holiday
-          example: "2021-01-30T08:30:00Z"
         end:
           type: string
-          format: date-time
+          format: date
           description: end of the holiday
-          example: "2021-01-30T08:30:00Z"
         text:
           type: string
           description: description of the holiday
@@ -910,12 +1054,10 @@ components:
           type: string
           format: date-time
           description: begin of the period
-          example: "2021-01-30T08:30:00Z"
         end:
           type: string
           format: date-time
           description: end of the period
-          example: "2021-01-30T08:30:00Z"
         text:
           type: string
           description: description of the period
@@ -924,6 +1066,9 @@ components:
       title: TestDTO
       type: object
       properties:
+        classId:
+          type: integer
+          format: int64
         courseId:
           type: integer
           format: int64
@@ -931,12 +1076,10 @@ components:
           type: string
           format: date-time
           description: begin of the period
-          example: "2021-01-30T08:30:00Z"
         end:
           type: string
           format: date-time
           description: end of the period
-          example: "2021-01-30T08:30:00Z"
         text:
           type: string
           description: description of the test
@@ -951,8 +1094,18 @@ components:
           type: integer
           format: int64
         value:
-          type: integer
+          type: number
           format: double
           minimum: 1
           maximum: 6
+    GradeDTO:
+      title: GradeDTO
+      type: object
+      properties:
+        courseName:
+          type: string
+        value:
+          type: number
+          format: double
+
 

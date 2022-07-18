@@ -1,13 +1,11 @@
 <template>
-  <div class="container">
-    <div>
-      <Nav_bar/>
-    </div>
-    <div>
+  <v-app>
+    <Nav_bar/>
+    <v-container class="pt-12">
       <router-view/>
-    </div>
-    <notifications position="bottom left" />
-  </div>
+      <notifications position="bottom left" />
+    </v-container>
+  </v-app>
 </template>
 
 <style>

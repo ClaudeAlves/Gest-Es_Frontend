@@ -14,7 +14,9 @@
 
 import ApiClient from "../ApiClient";
 import ApiMessageDTO from '../model/ApiMessageDTO';
+import GradeDTO from '../model/GradeDTO';
 import MarkDTO from '../model/MarkDTO';
+import PeriodDTO from '../model/PeriodDTO';
 import TestDTO from '../model/TestDTO';
 
 /**
@@ -70,7 +72,49 @@ export default class EvaluationApi {
       let accepts = ['application/json'];
       let returnType = ApiMessageDTO;
       return this.apiClient.callApi(
-        '/evluation/test', 'POST',
+        '/evaluation/test', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getClassTests operation.
+     * @callback module:api/EvaluationApi~getClassTestsCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/PeriodDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the tests for a specific class.
+     * @param {Number} idClass 
+     * @param {module:api/EvaluationApi~getClassTestsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/PeriodDTO>}
+     */
+    getClassTests(idClass, callback) {
+      let postBody = null;
+      // verify the required parameter 'idClass' is set
+      if (idClass === undefined || idClass === null) {
+        throw new Error("Missing the required parameter 'idClass' when calling getClassTests");
+      }
+
+      let pathParams = {
+        'idClass': idClass
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [PeriodDTO];
+      return this.apiClient.callApi(
+        '/evaluation/tests/classes/{idClass}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -80,7 +124,7 @@ export default class EvaluationApi {
      * Callback function to receive the result of the getGrades operation.
      * @callback module:api/EvaluationApi~getGradesCallback
      * @param {String} error Error message, if any.
-     * @param {Array.<Number>} data The data returned by the service call.
+     * @param {Array.<module:model/GradeDTO>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -88,7 +132,7 @@ export default class EvaluationApi {
      * Get the grades of a student.
      * @param {Number} idStudent 
      * @param {module:api/EvaluationApi~getGradesCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<Number>}
+     * data is of type: {@link Array.<module:model/GradeDTO>}
      */
     getGrades(idStudent, callback) {
       let postBody = null;
@@ -110,7 +154,7 @@ export default class EvaluationApi {
       let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = ['Number'];
+      let returnType = [GradeDTO];
       return this.apiClient.callApi(
         '/evaluation/grades/{idStudent}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -122,7 +166,7 @@ export default class EvaluationApi {
      * Callback function to receive the result of the getStudentTests operation.
      * @callback module:api/EvaluationApi~getStudentTestsCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/TestDTO} data The data returned by the service call.
+     * @param {Array.<module:model/TestDTO>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -131,7 +175,7 @@ export default class EvaluationApi {
      * @param {Number} idCourse 
      * @param {Number} idStudent 
      * @param {module:api/EvaluationApi~getStudentTestsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/TestDTO}
+     * data is of type: {@link Array.<module:model/TestDTO>}
      */
     getStudentTests(idCourse, idStudent, callback) {
       let postBody = null;
@@ -158,9 +202,87 @@ export default class EvaluationApi {
       let authNames = ['JWTSecurity'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = TestDTO;
+      let returnType = [TestDTO];
       return this.apiClient.callApi(
         '/evaluation/marks/{idCourse}/student/{idStudent}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getTests operation.
+     * @callback module:api/EvaluationApi~getTestsCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/PeriodDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the tests for a specific user.
+     * @param {Number} idUser 
+     * @param {module:api/EvaluationApi~getTestsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/PeriodDTO>}
+     */
+    getTests(idUser, callback) {
+      let postBody = null;
+      // verify the required parameter 'idUser' is set
+      if (idUser === undefined || idUser === null) {
+        throw new Error("Missing the required parameter 'idUser' when calling getTests");
+      }
+
+      let pathParams = {
+        'idUser': idUser
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [PeriodDTO];
+      return this.apiClient.callApi(
+        '/evaluation/tests/user/{idUser}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getTestsUser operation.
+     * @callback module:api/EvaluationApi~getTestsUserCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/PeriodDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the tests for the user.
+     * @param {module:api/EvaluationApi~getTestsUserCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/PeriodDTO>}
+     */
+    getTestsUser(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [PeriodDTO];
+      return this.apiClient.callApi(
+        '/evaluation/tests', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

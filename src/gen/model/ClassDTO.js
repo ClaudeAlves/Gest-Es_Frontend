@@ -47,6 +47,9 @@ class ClassDTO {
         if (data) {
             obj = obj || new ClassDTO();
 
+            if (data.hasOwnProperty('id')) {
+                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
+            }
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
@@ -59,6 +62,11 @@ class ClassDTO {
 
 
 }
+
+/**
+ * @member {Number} id
+ */
+ClassDTO.prototype['id'] = undefined;
 
 /**
  * @member {String} name

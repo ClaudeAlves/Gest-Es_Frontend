@@ -47,6 +47,9 @@ class TestDTO {
         if (data) {
             obj = obj || new TestDTO();
 
+            if (data.hasOwnProperty('classId')) {
+                obj['classId'] = ApiClient.convertToType(data['classId'], 'Number');
+            }
             if (data.hasOwnProperty('courseId')) {
                 obj['courseId'] = ApiClient.convertToType(data['courseId'], 'Number');
             }
@@ -65,6 +68,11 @@ class TestDTO {
 
 
 }
+
+/**
+ * @member {Number} classId
+ */
+TestDTO.prototype['classId'] = undefined;
 
 /**
  * @member {Number} courseId
