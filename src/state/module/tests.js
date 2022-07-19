@@ -18,15 +18,15 @@ const tests = {
 
     },
     actions: {
-        actionCreateTest({commit}, TestDTO) {
+        actionCreateTest({commit}, testDTO) {
             commit('mutationCreateTestWaiting');
             const api = new EvaluationApi();
 
-            api.createTest(testDTO, (e, d, r) => {
+            api.createTest({testDTO}, (e, d, r) => {
                 if (e) {
-                    StateHelper.simpleErrorManagement(e, 'mutationGetTe')
+                    StateHelper.simpleErrorManagement(e, 'mutationCreateTestError')
                 } else {
-                    commit('mutationCreateTestSuccess')
+                    commit('mutationCreateTestSuccess', {});
                     Notifications.success("Création réussie", "test");
                 }
             })
