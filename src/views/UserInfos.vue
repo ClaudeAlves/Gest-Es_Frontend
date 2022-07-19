@@ -1,5 +1,4 @@
 <template>
-  <v-container>
     <v-card>
       <v-card-title class="page-title">
         Page utilisateur
@@ -16,5 +15,4 @@
         </v-container>
       </v-card-text>
     </v-card>
-  </v-container>
 </template>

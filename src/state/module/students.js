@@ -11,9 +11,6 @@ const students = {
 
     }),
     getters: {
-        getStudents(state) {
-            return state.data.students;
-        }
     },
     actions: {
 

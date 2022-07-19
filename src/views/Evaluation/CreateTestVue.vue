@@ -10,23 +10,11 @@
           text
           v-model="selectedCourseId"
           :items="Object.values(this.courses)"
-          @input="loadClasses()"
           item-text="name"
           item-value="id">
       </v-select>
     </v-container>
     <v-spacer></v-spacer>
-    <!--v-container>
-      Choix de la classe
-      <v-select
-          text
-          no-data-text="Choisissez un cours"
-          v-model="selectedClassId"
-          :items="Object.values(this.classes)"
-          item-text="name"
-          item-value="id">
-      </v-select>
-    </v-container-->
 
       <v-container>
         <v-container>
@@ -152,14 +140,14 @@
                     text
                     @click="dialog = false"
                 >
-                  Disagree
+                  Annuler
                 </v-btn>
                 <v-btn
-                    color="teal darken-1"
+                    color="teal lighten-1<v-"
                     text
                     @click="createTest"
                 >
-                  Agree
+                  Créer
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -190,20 +178,15 @@ export default {
     menuTimeEnd: false,
   }),
   methods: {
-    loadClasses() {
-      this.$store.dispatch('actionGetClassesFromCourse', this.selectedCourseId);
-    },
     createTest() {
 
       if(this.selectedCourseId !== -1 &&
-          //this.selectedClassId !== -1 &&
           this.selectedStartTime !== null &&
           this.selectedEndTime !== null
           ) {
         if(EventsUtils.areTimesValid(this.selectedStartTime, this.selectedEndTime)) {
           let testDTO = new TestDTO();
           testDTO.text = this.testComment;
-          //testDTO.classId = this.selectedClassId;
           testDTO.courseId = this.selectedCourseId;
           testDTO.start = new Date(EventsUtils.formatDateToBackend(this.selectedDate, this.selectedStartTime))
           testDTO.end = new Date(EventsUtils.formatDateToBackend(this.selectedDate, this.selectedEndTime))
@@ -216,23 +199,15 @@ export default {
       }
 
       this.dialog = false;
-    },
-    returnClass() {
-      return (this.classes).map(aClass => aClass.idClass).indexOf(this.selectedClassId);
     }
   },
   mounted() {
     this.$store.dispatch('actionGetCourses');
-    this.$store.dispatch('actionResetClasses');
   },
   computed: {
     ...mapGetters({
-      classes: 'getClasses',
       courses: 'getCourses',
-    }),
-    filteredData(){
-      return this.items.filter(item => item.type === 'test')
-    }
+    })
   },
 }
 </script>

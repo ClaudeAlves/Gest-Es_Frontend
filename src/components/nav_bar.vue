@@ -62,7 +62,7 @@
           </v-list-item>
           <v-list-item>
             <v-btn text>
-              <router-link tag="div" to="/tests">Editer mes tests</router-link>
+              <router-link tag="div" to="/testEdit">Editer mes tests</router-link>
             </v-btn>
           </v-list-item>
         </v-list>

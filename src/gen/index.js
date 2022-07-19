@@ -28,6 +28,8 @@ import RegisterDTO from './model/RegisterDTO';
 import RoleDTO from './model/RoleDTO';
 import SubjectDTO from './model/SubjectDTO';
 import TestDTO from './model/TestDTO';
+import TestInfoDTO from './model/TestInfoDTO';
+import TestInfoDTOStudents from './model/TestInfoDTOStudents';
 import UserDTO from './model/UserDTO';
 import UserModificationDTO from './model/UserModificationDTO';
 import UserSimpleDTO from './model/UserSimpleDTO';
@@ -166,6 +168,18 @@ export {
      * @property {module:model/TestDTO}
      */
     TestDTO,
+
+    /**
+     * The TestInfoDTO model constructor.
+     * @property {module:model/TestInfoDTO}
+     */
+    TestInfoDTO,
+
+    /**
+     * The TestInfoDTOStudents model constructor.
+     * @property {module:model/TestInfoDTOStudents}
+     */
+    TestInfoDTOStudents,
 
     /**
      * The UserDTO model constructor.

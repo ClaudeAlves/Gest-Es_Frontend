@@ -30,9 +30,9 @@ const routes = [
         }
     },
     {
-        path: "/tests",
-        name: "tests",
-        component: () => import("../views/Evaluation/TestsMarksView.vue"),
+        path: "/testEdit",
+        name: "testEdit",
+        component: () => import("../views/Evaluation/TestEdit.vue"),
         props: true,
         meta: {
             requiresAuth: true,
@@ -46,8 +46,7 @@ const routes = [
         meta: {
             requiresAuth: true,
         }
-    }
-    ,
+    },
     {
         path: "/profile",
         name: "userprofile",

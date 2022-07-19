@@ -18,6 +18,7 @@ import GradeDTO from '../model/GradeDTO';
 import MarkDTO from '../model/MarkDTO';
 import PeriodDTO from '../model/PeriodDTO';
 import TestDTO from '../model/TestDTO';
+import TestInfoDTO from '../model/TestInfoDTO';
 
 /**
 * Evaluation service.
@@ -247,6 +248,42 @@ export default class EvaluationApi {
       let returnType = [PeriodDTO];
       return this.apiClient.callApi(
         '/evaluation/tests/user/{idUser}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getTestsInfoUser operation.
+     * @callback module:api/EvaluationApi~getTestsInfoUserCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/TestInfoDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the tests informations for the user.
+     * @param {module:api/EvaluationApi~getTestsInfoUserCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/TestInfoDTO>}
+     */
+    getTestsInfoUser(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [TestInfoDTO];
+      return this.apiClient.callApi(
+        '/evalutation/tests/info', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
