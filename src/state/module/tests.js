@@ -1,7 +1,6 @@
 import States from "@/state/States";
 import Notifications from "@/utils/Notifications";
 import {EvaluationApi} from "@/gen";
-import testDTO from "@/gen/model/TestDTO";
 import StateHelper from "@/state/StateHelper";
 
 const tests = {
@@ -12,14 +11,18 @@ const tests = {
             data: {
                 tests: [
                     {
-                        "testId": 1,
-                        "testName": "nom du test",
+                        "courseId": 0,
                         "students": [
                             {
-                                "name": "s1",
-                                "id": 5,
-                                "testValue": null
-                            }]
+                                "id": 0,
+                                "name": "string",
+                                "testValue": 0
+                            }
+                        ],
+                        "testId": 0,
+                        "testName": "string",
+                        "text": "string",
+                        "weighting": 0
                     }
                 ], // current loaded tests infos
             }
@@ -54,9 +57,31 @@ const tests = {
                     commit('mutationGetTestsInfoSuccess', {...d})
                 }
             })
+        },
+        actionMarkTest({commit}, markDTO) {
+            commit('mutationPutMarkWaiting', {});
+            const api = new EvaluationApi();
+            console.log(markDTO)
+            api.noteStudent({markDTO}, (e, d, r) => {
+                if(e) {
+                    StateHelper.simpleErrorManagement(e, 'mutationPutMarkError', commit);
+                } {
+                    commit('mutationPutMarkSuccess', {})
+                }
+            })
         }
     },
     mutations: {
+        mutationPutMarkWaiting(state, data) {
+            state.tests.state = States.WAITING;
+        },
+        mutationPutMarkError(state, data) {
+            state.tests.state = States.ERROR;
+            Notifications.error("Erreur lors de la notation d'un test", data.message);
+        },
+        mutationPutMarkSuccess(state, data) {
+            state.tests.state = States.SUCCESS;
+        },
         mutationCreateTestWaiting(state, data) {
             state.tests.state = States.WAITING;
         },

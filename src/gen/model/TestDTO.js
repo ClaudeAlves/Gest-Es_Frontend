@@ -59,6 +59,9 @@ class TestDTO {
             if (data.hasOwnProperty('text')) {
                 obj['text'] = ApiClient.convertToType(data['text'], 'String');
             }
+            if (data.hasOwnProperty('weighting')) {
+                obj['weighting'] = ApiClient.convertToType(data['weighting'], 'Number');
+            }
         }
         return obj;
     }
@@ -88,6 +91,11 @@ TestDTO.prototype['end'] = undefined;
  * @member {String} text
  */
 TestDTO.prototype['text'] = undefined;
+
+/**
+ * @member {Number} weighting
+ */
+TestDTO.prototype['weighting'] = undefined;
 
 
 

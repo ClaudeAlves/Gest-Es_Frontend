@@ -64,7 +64,7 @@
                   format="24hr"
               >
                 <v-spacer></v-spacer>
-                <v-btn color="teal lighten-3" @click="menuTimeStart = false">Cancel</v-btn>
+                <v-btn color="teal lighten-3" @click="menuTimeStart = false">Annuler</v-btn>
                 <v-btn color="teal lighten-3" @click="$refs.dialog.save(selectedStartTime)">OK</v-btn>
               </v-time-picker>
             </v-dialog>
@@ -89,16 +89,25 @@
               <v-time-picker
                   v-if="menuTimeEnd"
                   v-model="selectedEndTime"
-                  full-width
                   color="teal lighten-3"
                   format="24hr"
               >
                 <v-spacer></v-spacer>
-                <v-btn color="teal lighten-3" @click="menuTimeEnd = false">Cancel</v-btn>
+                <v-btn color="teal lighten-3" @click="menuTimeEnd = false">Annuler</v-btn>
                 <v-btn color="teal lighten-3" @click="$refs.dialogEnd.save(selectedEndTime)">OK</v-btn>
               </v-time-picker>
             </v-dialog>
           </v-flex>
+        </v-container>
+        <v-spacer></v-spacer>
+        <v-container>
+          <v-text-field
+              v-model="inputtedTestWeighting"
+              hide-details
+              single-line
+              label="Pondération en pourcent"
+              type="number"
+          />
         </v-container>
         <v-spacer></v-spacer>
         <v-container>
@@ -117,6 +126,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                   color="teal lighten-1"
+                  text
                   v-bind="attrs"
                   v-on="on"
               >
@@ -124,26 +134,27 @@
               </v-btn>
             </template>
             <v-card>
-              <v-card-title class="text-h5">
+              <v-card-title class="text-h6">
                 Êtes vous sûr de vouloir créer le test?
               </v-card-title>
               <v-card-text>
-                date : {{ this.selectedDate}}<br/>
-                heure de début : {{ this.selectedStartTime}}<br/>
-                heure de fin : {{ this.selectedEndTime}}<br/>
-                commentaire : {{ this.testComment}}<br/>
+                Date : {{ this.selectedDate }}<br/>
+                Heure de début : {{ this.selectedStartTime }}<br/>
+                Heure de fin : {{ this.selectedEndTime }}<br/>
+                Commentaire : {{ this.testComment }}<br/>
+                Pondération : {{ this.inputtedTestWeighting }}
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                    color="teal darken-1"
+                    color="teal lighten-1"
                     text
                     @click="dialog = false"
                 >
                   Annuler
                 </v-btn>
                 <v-btn
-                    color="teal lighten-1<v-"
+                    color="teal lighten-1"
                     text
                     @click="createTest"
                 >
@@ -166,12 +177,12 @@ import Notifications from "@/utils/Notifications";
 export default {
   name: "createTestVue",
   data: () => ({
-    selectedClassId: -1,
     selectedCourseId: -1,
     testComment: "",
     selectedDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     selectedStartTime: null,
     selectedEndTime: null,
+    inputtedTestWeighting: null,
     dialog: false,
     menuDate: false,
     menuTimeStart: false,
@@ -182,20 +193,22 @@ export default {
 
       if(this.selectedCourseId !== -1 &&
           this.selectedStartTime !== null &&
-          this.selectedEndTime !== null
+          this.selectedEndTime !== null &&
+          this.inputtedTestWeighting !== null
           ) {
         if(EventsUtils.areTimesValid(this.selectedStartTime, this.selectedEndTime)) {
           let testDTO = new TestDTO();
           testDTO.text = this.testComment;
           testDTO.courseId = this.selectedCourseId;
-          testDTO.start = new Date(EventsUtils.formatDateToBackend(this.selectedDate, this.selectedStartTime))
-          testDTO.end = new Date(EventsUtils.formatDateToBackend(this.selectedDate, this.selectedEndTime))
+          testDTO.start = new Date(EventsUtils.formatDateToBackend(this.selectedDate, this.selectedStartTime));
+          testDTO.end = new Date(EventsUtils.formatDateToBackend(this.selectedDate, this.selectedEndTime));
+          testDTO.weighting = this.inputtedTestWeighting/100;
           this.$store.dispatch("actionCreateTest", testDTO)
         } else {
           Notifications.error("Erreur Dates", "Date de fin avant date de début")
         }
       } else {
-        Notifications.error("Contenu du test incomplet", "Veuillez entrer tous les champs")
+        Notifications.error("Contenu du test incomplet", "Veuillez remplir tous les champs")
       }
 
       this.dialog = false;

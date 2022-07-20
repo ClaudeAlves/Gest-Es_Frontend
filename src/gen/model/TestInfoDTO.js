@@ -54,6 +54,9 @@ class TestInfoDTO {
             if (data.hasOwnProperty('testName')) {
                 obj['testName'] = ApiClient.convertToType(data['testName'], 'String');
             }
+            if (data.hasOwnProperty('weighting')) {
+                obj['weighting'] = ApiClient.convertToType(data['weighting'], 'Number');
+            }
             if (data.hasOwnProperty('courseId')) {
                 obj['courseId'] = ApiClient.convertToType(data['courseId'], 'Number');
             }
@@ -79,6 +82,11 @@ TestInfoDTO.prototype['testId'] = undefined;
  * @member {String} testName
  */
 TestInfoDTO.prototype['testName'] = undefined;
+
+/**
+ * @member {Number} weighting
+ */
+TestInfoDTO.prototype['weighting'] = undefined;
 
 /**
  * @member {Number} courseId

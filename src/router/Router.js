@@ -39,6 +39,15 @@ const routes = [
         }
     },
     {
+        path: "/testAnnotation",
+        name: "testAnnotation",
+        component: () => import("../views/Evaluation/TestAnnotation"),
+        props: true,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
         path: "/testCreation",
         name: "testCreation",
         component: () => import("../views/Evaluation/CreateTestVue.vue"),

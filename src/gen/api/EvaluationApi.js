@@ -359,7 +359,7 @@ export default class EvaluationApi {
       let accepts = ['application/json'];
       let returnType = ApiMessageDTO;
       return this.apiClient.callApi(
-        '/evaluation/mark', 'POST',
+        '/evaluation/mark', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

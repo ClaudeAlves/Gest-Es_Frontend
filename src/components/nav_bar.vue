@@ -57,12 +57,17 @@
           <v-list class="teal lighten-4">
             <v-list-item>
               <v-btn text>
-                <router-link tag="div" to="/testCreation">Créer un test</router-link>
+                <router-link tag="div" to="/testCreation">Créer test</router-link>
               </v-btn>
           </v-list-item>
           <v-list-item>
             <v-btn text>
-              <router-link tag="div" to="/testEdit">Editer mes tests</router-link>
+              <router-link tag="div" to="/testEdit">Editer tests</router-link>
+            </v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn text>
+              <router-link tag="div" to="/testAnnotation">Annoter test</router-link>
             </v-btn>
           </v-list-item>
         </v-list>
