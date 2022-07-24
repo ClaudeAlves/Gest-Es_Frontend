@@ -13,14 +13,7 @@ const calendar = {
                 Events: [],
             },
             isDisplayable: false
-        }/*,
-        myCalendar: {
-            state: States.INIT,
-            message: "messageMyCalendar",
-            data: {
-                MyEvents: [],
-            }
-        }*/
+        }
     }),
     getters: {
         getCalendar(state) {
@@ -28,10 +21,7 @@ const calendar = {
         },
         isCalendarDisplayable(state) {
             return state.calendar.isDisplayable;
-        }/*,
-        geCalendarEvents(state) {
-            return state.calendar.data.Events
-        }*/
+        }
     },
     actions: {
         actionGetCalendar({commit}, idUser) {

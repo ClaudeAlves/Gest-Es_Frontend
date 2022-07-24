@@ -110,7 +110,7 @@ export default {
           markDTO.testId = this.selectedTest;
           markDTO.studentId = student.id;
           markDTO.value = student.testValue;
-          this.$store.dispatch('actionMarkTest', markDTO);
+          this.$store.dispatch('actionNoteTest', markDTO);
         })
       })
     },

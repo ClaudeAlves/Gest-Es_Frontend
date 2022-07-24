@@ -60,25 +60,43 @@
                 <router-link tag="div" to="/testCreation">Créer test</router-link>
               </v-btn>
           </v-list-item>
-          <v-list-item>
+            <v-list-item>
+              <v-btn text>
+                <router-link tag="div" to="/testAnnotation">Annoter test</router-link>
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
             <v-btn text>
-              <router-link tag="div" to="/testEdit">Editer tests</router-link>
+              <router-link tag="div" to="/testEdit">Editer notes tests</router-link>
             </v-btn>
           </v-list-item>
-          <v-list-item>
-            <v-btn text>
-              <router-link tag="div" to="/testAnnotation">Annoter test</router-link>
-            </v-btn>
-          </v-list-item>
+
         </v-list>
       </v-menu>
+      <v-btn text v-if="this.isLoggedIn && !this.isStudent">
+        <router-link
+            tag="div"
+            to="/notes"
+        >
+          notes
+        </router-link>
+      </v-btn>
+      <v-btn text v-if="this.isLoggedIn && this.isStudent"
+      @click="resetStudentMarks()">
+        <router-link
+            tag="div"
+            to="/selfNotes"
+        >
+          notes
+        </router-link>
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn text @click="logoutMethod" v-if="this.isLoggedIn">
         <router-link tag="div" to="/">Déconnexion</router-link>
       </v-btn>
 
       <div v-if="this.isLoggedIn">
-        current user : {{ this.$store.getters.getLogin.data.username }}
+        utilisateur : {{ this.$store.getters.getLogin.data.username }}
       </div>
     </v-app-bar>
   </nav>
@@ -111,6 +129,11 @@ export default {
   methods: {
     logoutMethod() {
       this.$store.dispatch("actionLogout")
+    },
+    resetStudentMarks() {
+      this.$store.dispatch('actionGetSelfSynthesis');
+      this.$store.dispatch('actionGetSelfModulesSelectable');
+      this.$store.dispatch('actionResetInfosModules');
     }
   }
 }

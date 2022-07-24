@@ -54,11 +54,11 @@ const tests = {
                 if(e) {
                     StateHelper.simpleErrorManagement(e, 'mutationGetTestsInfoError', commit);
                 } {
-                    commit('mutationGetTestsInfoSuccess', {...d})
+                    commit('mutationGetTestsInfoSuccess', {...d});
                 }
             })
         },
-        actionMarkTest({commit}, markDTO) {
+        actionNoteTest({commit}, markDTO) {
             commit('mutationPutMarkWaiting', {});
             const api = new EvaluationApi();
             console.log(markDTO)
@@ -66,7 +66,7 @@ const tests = {
                 if(e) {
                     StateHelper.simpleErrorManagement(e, 'mutationPutMarkError', commit);
                 } {
-                    commit('mutationPutMarkSuccess', {})
+                    commit('mutationPutMarkSuccess', {});
                 }
             })
         }
@@ -105,7 +105,7 @@ const tests = {
         mutationGetTestsInfoSuccess(state, data) {
             state.tests.state = States.SUCCESS;
             state.tests.data.tests = {...data}
-            Notifications.debug("Tests", "Created Successfully")
+            Notifications.success("Tests", "Créer avec succès")
         }
     }
 }

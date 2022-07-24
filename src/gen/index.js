@@ -18,14 +18,22 @@ import CalendarDTO from './model/CalendarDTO';
 import ClassDTO from './model/ClassDTO';
 import CourseDTO from './model/CourseDTO';
 import GradeDTO from './model/GradeDTO';
+import GradeSynthesis from './model/GradeSynthesis';
+import GradeSynthesisMarks from './model/GradeSynthesisMarks';
+import GradeSynthesisStudentMarks from './model/GradeSynthesisStudentMarks';
 import HolidayDTO from './model/HolidayDTO';
 import LoginRequestDTO from './model/LoginRequestDTO';
 import LoginSuccessDTO from './model/LoginSuccessDTO';
 import MarkDTO from './model/MarkDTO';
 import ModuleDTO from './model/ModuleDTO';
+import ModuleMarkInfos from './model/ModuleMarkInfos';
+import ModuleMarkInfosMarks from './model/ModuleMarkInfosMarks';
+import ModuleMarkInfosSubjects from './model/ModuleMarkInfosSubjects';
+import ModuleMarkInfosTests from './model/ModuleMarkInfosTests';
 import PeriodDTO from './model/PeriodDTO';
 import RegisterDTO from './model/RegisterDTO';
 import RoleDTO from './model/RoleDTO';
+import SimpleModuleDTO from './model/SimpleModuleDTO';
 import SubjectDTO from './model/SubjectDTO';
 import TestDTO from './model/TestDTO';
 import TestInfoDTO from './model/TestInfoDTO';
@@ -110,6 +118,24 @@ export {
     GradeDTO,
 
     /**
+     * The GradeSynthesis model constructor.
+     * @property {module:model/GradeSynthesis}
+     */
+    GradeSynthesis,
+
+    /**
+     * The GradeSynthesisMarks model constructor.
+     * @property {module:model/GradeSynthesisMarks}
+     */
+    GradeSynthesisMarks,
+
+    /**
+     * The GradeSynthesisStudentMarks model constructor.
+     * @property {module:model/GradeSynthesisStudentMarks}
+     */
+    GradeSynthesisStudentMarks,
+
+    /**
      * The HolidayDTO model constructor.
      * @property {module:model/HolidayDTO}
      */
@@ -140,6 +166,30 @@ export {
     ModuleDTO,
 
     /**
+     * The ModuleMarkInfos model constructor.
+     * @property {module:model/ModuleMarkInfos}
+     */
+    ModuleMarkInfos,
+
+    /**
+     * The ModuleMarkInfosMarks model constructor.
+     * @property {module:model/ModuleMarkInfosMarks}
+     */
+    ModuleMarkInfosMarks,
+
+    /**
+     * The ModuleMarkInfosSubjects model constructor.
+     * @property {module:model/ModuleMarkInfosSubjects}
+     */
+    ModuleMarkInfosSubjects,
+
+    /**
+     * The ModuleMarkInfosTests model constructor.
+     * @property {module:model/ModuleMarkInfosTests}
+     */
+    ModuleMarkInfosTests,
+
+    /**
      * The PeriodDTO model constructor.
      * @property {module:model/PeriodDTO}
      */
@@ -156,6 +206,12 @@ export {
      * @property {module:model/RoleDTO}
      */
     RoleDTO,
+
+    /**
+     * The SimpleModuleDTO model constructor.
+     * @property {module:model/SimpleModuleDTO}
+     */
+    SimpleModuleDTO,
 
     /**
      * The SubjectDTO model constructor.

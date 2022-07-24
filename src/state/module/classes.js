@@ -10,16 +10,12 @@ const classes = {
             message: "messageClasses",
             data: {
                 classes: [], // classes of the user
-                students: []
             }
         }
     }),
     getters: {
         getClasses(state) {
             return state.classes.data.classes;
-        },
-        getStudentsFromClass(state) {
-            return state.classes.data.students;
         }
     },
     actions: {

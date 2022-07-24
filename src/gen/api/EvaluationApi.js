@@ -15,8 +15,11 @@
 import ApiClient from "../ApiClient";
 import ApiMessageDTO from '../model/ApiMessageDTO';
 import GradeDTO from '../model/GradeDTO';
+import GradeSynthesis from '../model/GradeSynthesis';
 import MarkDTO from '../model/MarkDTO';
+import ModuleMarkInfos from '../model/ModuleMarkInfos';
 import PeriodDTO from '../model/PeriodDTO';
+import SimpleModuleDTO from '../model/SimpleModuleDTO';
 import TestDTO from '../model/TestDTO';
 import TestInfoDTO from '../model/TestInfoDTO';
 
@@ -164,6 +167,210 @@ export default class EvaluationApi {
     }
 
     /**
+     * Callback function to receive the result of the getModuleInfosByClass operation.
+     * @callback module:api/EvaluationApi~getModuleInfosByClassCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/ModuleMarkInfos} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the marks and infos for each tests in a module.
+     * @param {Number} idModule 
+     * @param {Number} idClass 
+     * @param {module:api/EvaluationApi~getModuleInfosByClassCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/ModuleMarkInfos}
+     */
+    getModuleInfosByClass(idModule, idClass, callback) {
+      let postBody = null;
+      // verify the required parameter 'idModule' is set
+      if (idModule === undefined || idModule === null) {
+        throw new Error("Missing the required parameter 'idModule' when calling getModuleInfosByClass");
+      }
+      // verify the required parameter 'idClass' is set
+      if (idClass === undefined || idClass === null) {
+        throw new Error("Missing the required parameter 'idClass' when calling getModuleInfosByClass");
+      }
+
+      let pathParams = {
+        'idModule': idModule,
+        'idClass': idClass
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = ModuleMarkInfos;
+      return this.apiClient.callApi(
+        '/evaluation/module/{idModule}/classes/{idClass}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getModulesByClass operation.
+     * @callback module:api/EvaluationApi~getModulesByClassCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/SimpleModuleDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the modules names and id for selection.
+     * @param {Number} idClass 
+     * @param {module:api/EvaluationApi~getModulesByClassCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/SimpleModuleDTO>}
+     */
+    getModulesByClass(idClass, callback) {
+      let postBody = null;
+      // verify the required parameter 'idClass' is set
+      if (idClass === undefined || idClass === null) {
+        throw new Error("Missing the required parameter 'idClass' when calling getModulesByClass");
+      }
+
+      let pathParams = {
+        'idClass': idClass
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [SimpleModuleDTO];
+      return this.apiClient.callApi(
+        '/evaluation/modules/classes/{idClass}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSelfModuleInfos operation.
+     * @callback module:api/EvaluationApi~getSelfModuleInfosCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/ModuleMarkInfos} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the marks and infos for each tests in a module for the student using this endpoint.
+     * @param {Number} idModule 
+     * @param {module:api/EvaluationApi~getSelfModuleInfosCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/ModuleMarkInfos}
+     */
+    getSelfModuleInfos(idModule, callback) {
+      let postBody = null;
+      // verify the required parameter 'idModule' is set
+      if (idModule === undefined || idModule === null) {
+        throw new Error("Missing the required parameter 'idModule' when calling getSelfModuleInfos");
+      }
+
+      let pathParams = {
+        'idModule': idModule
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = ModuleMarkInfos;
+      return this.apiClient.callApi(
+        '/evaluation/module/{idModule}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSelfModules operation.
+     * @callback module:api/EvaluationApi~getSelfModulesCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/SimpleModuleDTO>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the modules names and id of the current student for selection.
+     * @param {module:api/EvaluationApi~getSelfModulesCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/SimpleModuleDTO>}
+     */
+    getSelfModules(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [SimpleModuleDTO];
+      return this.apiClient.callApi(
+        '/evaluation/modules', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSelfSynthesis operation.
+     * @callback module:api/EvaluationApi~getSelfSynthesisCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/GradeSynthesis} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the grades and infos for each module for the student using this endpoint.
+     * @param {module:api/EvaluationApi~getSelfSynthesisCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/GradeSynthesis}
+     */
+    getSelfSynthesis(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = GradeSynthesis;
+      return this.apiClient.callApi(
+        '/evaluation/grades', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the getStudentTests operation.
      * @callback module:api/EvaluationApi~getStudentTestsCallback
      * @param {String} error Error message, if any.
@@ -172,7 +379,7 @@ export default class EvaluationApi {
      */
 
     /**
-     * Get the tests of a student for a specific course.
+     * Get the marks of a student for a specific course.
      * @param {Number} idCourse 
      * @param {Number} idStudent 
      * @param {module:api/EvaluationApi~getStudentTestsCallback} callback The callback function, accepting three arguments: error, data, response
@@ -206,6 +413,48 @@ export default class EvaluationApi {
       let returnType = [TestDTO];
       return this.apiClient.callApi(
         '/evaluation/marks/{idCourse}/student/{idStudent}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSynthesisFromClass operation.
+     * @callback module:api/EvaluationApi~getSynthesisFromClassCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/GradeSynthesis} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the grades and infos for each module for a class.
+     * @param {Number} idClass 
+     * @param {module:api/EvaluationApi~getSynthesisFromClassCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/GradeSynthesis}
+     */
+    getSynthesisFromClass(idClass, callback) {
+      let postBody = null;
+      // verify the required parameter 'idClass' is set
+      if (idClass === undefined || idClass === null) {
+        throw new Error("Missing the required parameter 'idClass' when calling getSynthesisFromClass");
+      }
+
+      let pathParams = {
+        'idClass': idClass
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['JWTSecurity'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = GradeSynthesis;
+      return this.apiClient.callApi(
+        '/evaluation/grades/classes/{idClass}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -262,7 +511,7 @@ export default class EvaluationApi {
      */
 
     /**
-     * Get the tests informations for the user.
+     * Get the tests information's for the user.
      * @param {module:api/EvaluationApi~getTestsInfoUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/TestInfoDTO>}
      */

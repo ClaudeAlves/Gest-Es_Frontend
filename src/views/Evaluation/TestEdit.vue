@@ -104,7 +104,7 @@ export default {
       markDTO.testId = idTest;
       markDTO.studentId = idStudent;
       markDTO.value = value;
-      this.$store.dispatch('actionMarkTest', markDTO);
+      this.$store.dispatch('actionNoteTest', markDTO);
     },
     setHide() {
       this.$store.dispatch('actionGetTests', this.selectedCourseId);

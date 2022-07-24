@@ -64,6 +64,22 @@ const routes = [
             requiresAuth: true,
         }
     },
+    {
+        path: "/notes",
+        name: "notes",
+        component: () => import("../views/Evaluation/MarkVue"),
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        path: "/selfNotes",
+        name: "selfNotes",
+        component: () => import("../views/Evaluation/SelfMarkVue"),
+        meta: {
+            requiresAuth: true,
+        }
+    }
 ];
 const router = new VueRouter({
     mode: "history",
