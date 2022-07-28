@@ -3,7 +3,9 @@ import {EvaluationApi} from "@/gen";
 import StateHelper from "@/state/StateHelper";
 import Notifications from "@/utils/Notifications";
 
-
+/**
+ * Evaluation module stores information about modules marks grades etc.
+ */
 const evaluation = {
     state: () => ({
         evaluation: {

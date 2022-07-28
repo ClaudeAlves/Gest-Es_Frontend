@@ -43,6 +43,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Subs student to class.
      * Subs a student to a class.
      * @param {Number} idClass 
      * @param {Number} idStudent 
@@ -91,6 +92,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Subs class to course.
      * Subs a class to a course.
      * @param {Number} idCourse 
      * @param {Number} idClass 
@@ -139,6 +141,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Subs student to module.
      * Subs a student to a module.
      * @param {Number} idModule 
      * @param {Number} idStudent 
@@ -187,6 +190,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Adds subject to course.
      * Adds a subject to a course.
      * @param {Number} idSubject 
      * @param {Number} idCourse 
@@ -235,6 +239,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Adds subject to module.
      * Adds a subject to a module.
      * @param {Number} idModule 
      * @param {Number} idSubject 
@@ -283,6 +288,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Subs student to subject.
      * Subs a student to a subject.
      * @param {Number} idSubject 
      * @param {Number} idStudent 
@@ -331,6 +337,7 @@ export default class OrganisationApi {
      */
 
     /**
+     * Adds teacher to course.
      * Adds a teacher to a course.
      * @param {Number} idCourse 
      * @param {Number} idTeacher 

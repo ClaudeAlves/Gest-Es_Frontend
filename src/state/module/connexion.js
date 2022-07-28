@@ -5,6 +5,9 @@ import Notifications from '../../utils/Notifications';
 import StateHelper from '@/state/StateHelper';
 import ApiClient from '../../gen/ApiClient'
 
+/**
+ * Connexion module stores information about the login session.
+ */
 function initialState() {
     return {
         login: {
@@ -38,22 +41,14 @@ const connexion = {
         },
         isTeacher(state) {
             return isRole("ROLE_TEACHER", state)
-        },
-        getStateCalendar(state, _, rootState) {
-            return rootState.calendar;
         }
     },
     actions: {
-        /**
-         *
-         * @param {*} { commit } the context contains a function called commit used to commit mutations.
-         * @param loginRequestDTO
-         */
         actionLogin({ commit }, loginRequestDTO) {
             // First commit the waiting mutation
             commit('mutationLoginWaiting', {});
             const api = new AuthenticationApi();
-            api.login({ loginRequestDTO }, (e, d, /* eslint-disable */r/* eslint-enable */) => {
+            api.login({ loginRequestDTO }, (e, d, r) => {
                 if (e) {
                     StateHelper.simpleErrorManagement(e, 'mutationLoginError', commit);
                 } else {
@@ -66,7 +61,7 @@ const connexion = {
             commit('mutationLogoutWaiting', {});
             const api = new AuthenticationApi();
 
-            api.logout(  (e, d, /* eslint-disable */r/* eslint-enable */) => {
+            api.logout(  (e, d, r) => {
                 if (e) {
                     StateHelper.simpleErrorManagement(e, 'mutationLogoutError', commit);
                 } else {
@@ -76,11 +71,6 @@ const connexion = {
         },
     },
     mutations: {
-        /**
-         *
-         * @param {*} state the application state in Vuex store to modify.
-         * @param {*} data Additional data to update the state accordingly.
-         */
         mutationLoginWaiting(state, data) {
             state.login.state = States.WAITING;
         },
@@ -107,25 +97,6 @@ const connexion = {
             state.login.message = data.message;
             Notifications.error("Erreur d'Authentication", data.message);
         },
-        mutationRegisterWaiting(state, data) {
-            state.register.state = States.WAITING;
-        },
-        mutationRegisterSuccess(state, data) {
-            state.register.state = States.SUCCESS;
-            state.register.data = { ...data };
-
-            // Reset the login for better UX
-            state.login = initialState().login;
-
-            Notifications.success("Inscription Réussie", "Vous pouvez vous connecter maintenant.");
-            router.push({ name: 'login' });
-        },
-        mutationRegisterError(state, data) {
-            state.register.state = States.ERROR;
-            state.register.message = data.message;
-            Notifications.error("Erreur d'Inscription", data.message);
-        },
-
         mutationLogoutWaiting(state, data) {
             state.login.state = States.WAITING;
         },

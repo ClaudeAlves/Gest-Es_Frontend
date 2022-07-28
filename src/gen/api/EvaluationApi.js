@@ -91,6 +91,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get the tests of a class.
      * Get the tests for a specific class.
      * @param {Number} idClass 
      * @param {module:api/EvaluationApi~getClassTestsCallback} callback The callback function, accepting three arguments: error, data, response
@@ -133,6 +134,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get grades of a student.
      * Get the grades of a student.
      * @param {Number} idStudent 
      * @param {module:api/EvaluationApi~getGradesCallback} callback The callback function, accepting three arguments: error, data, response
@@ -175,6 +177,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get infos about tests  in a module.
      * Get the marks and infos for each tests in a module.
      * @param {Number} idModule 
      * @param {Number} idClass 
@@ -223,6 +226,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get modules infos for selection.
      * Get the modules names and id for selection.
      * @param {Number} idClass 
      * @param {module:api/EvaluationApi~getModulesByClassCallback} callback The callback function, accepting three arguments: error, data, response
@@ -265,6 +269,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * get infos about tests in a module.
      * Get the marks and infos for each tests in a module for the student using this endpoint.
      * @param {Number} idModule 
      * @param {module:api/EvaluationApi~getSelfModuleInfosCallback} callback The callback function, accepting three arguments: error, data, response
@@ -307,6 +312,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get modules infos.
      * Get the modules names and id of the current student for selection.
      * @param {module:api/EvaluationApi~getSelfModulesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/SimpleModuleDTO>}
@@ -343,6 +349,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get the synthesis of modules for the user.
      * Get the grades and infos for each module for the student using this endpoint.
      * @param {module:api/EvaluationApi~getSelfSynthesisCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/GradeSynthesis}
@@ -379,6 +386,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get marks of a student in a course.
      * Get the marks of a student for a specific course.
      * @param {Number} idCourse 
      * @param {Number} idStudent 
@@ -427,6 +435,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get the synthesis of modules for a class.
      * Get the grades and infos for each module for a class.
      * @param {Number} idClass 
      * @param {module:api/EvaluationApi~getSynthesisFromClassCallback} callback The callback function, accepting three arguments: error, data, response
@@ -469,6 +478,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get the tests for a user.
      * Get the tests for a specific user.
      * @param {Number} idUser 
      * @param {module:api/EvaluationApi~getTestsCallback} callback The callback function, accepting three arguments: error, data, response
@@ -511,6 +521,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get tests information for user.
      * Get the tests information's for the user.
      * @param {module:api/EvaluationApi~getTestsInfoUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/TestInfoDTO>}
@@ -547,6 +558,7 @@ export default class EvaluationApi {
      */
 
     /**
+     * Get the tests for the user.
      * Get the tests for the user.
      * @param {module:api/EvaluationApi~getTestsUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/PeriodDTO>}

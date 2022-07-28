@@ -1,7 +1,8 @@
+<!-- Page to put multiple marks for a test -->
 <template>
   <v-card>
     <v-card-title class="page-title">
-      Annoter un test
+      Saisir des notes
 
     </v-card-title>
     <v-container>

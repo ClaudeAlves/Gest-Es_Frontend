@@ -3,6 +3,9 @@ import {UserApi} from "@/gen";
 import StateHelper from "@/state/StateHelper";
 import Notifications from "@/utils/Notifications";
 
+/**
+ * Classes module stores classes.
+ */
 const classes = {
     state: () => ({
         classes: {

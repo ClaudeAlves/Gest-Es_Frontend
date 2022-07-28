@@ -6,6 +6,9 @@ import store from '@/state/store';
 import vuetify from './plugins/vuetify'
 import Notifications from "vue-notification";
 
+/**
+ * Base of the vue application we define here the router, store, vuetify and the app and we mount it.
+ */
 Vue.use(Material);
 Vue.use(Notifications)
 

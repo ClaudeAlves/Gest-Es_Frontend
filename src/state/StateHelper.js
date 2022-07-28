@@ -1,3 +1,6 @@
+/**
+ * State helper provides behaviour for errors.
+ */
 export default {
     simpleErrorManagement(error, mutationName, commit) {
         if (error.timeout) {

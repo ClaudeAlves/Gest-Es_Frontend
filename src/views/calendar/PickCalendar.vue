@@ -1,3 +1,4 @@
+<!-- Calendar view that shows calendars of related users -->
 <template>
   <v-card>
     <v-card-title class ="page-title">
@@ -29,7 +30,6 @@ export default {
   }),
   methods: {
     loadCalendarSelect() {
-      console.log(this.selectId)
       this.$store.dispatch('actionGetClassCalendar', this.selectId);
     }
   },

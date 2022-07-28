@@ -1,3 +1,4 @@
+<!-- Login view let's a user log in -->
 <template>
   <v-app>
     <v-container fill-height>
@@ -54,14 +55,6 @@
   margin: 0 auto;
   width: 50%;
   height: 50%;
-}
-
-.login-title {
-  text-align: center;
-}
-
-.main-title {
-  text-align: center;
 }
 </style>
 

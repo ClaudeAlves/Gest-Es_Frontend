@@ -4,6 +4,9 @@ import {CalendarApi, EvaluationApi} from "@/gen";
 import StateHelper from "@/state/StateHelper";
 import EventsUtils from "@/utils/EventsUtils";
 
+/**
+ * Calendar module stores the events to be displayed in the calendar.
+ */
 const calendar = {
     state: () => ({
         calendar: {
@@ -18,16 +21,13 @@ const calendar = {
     getters: {
         getCalendar(state) {
             return state.calendar.data.Events;
-        },
-        isCalendarDisplayable(state) {
-            return state.calendar.isDisplayable;
         }
     },
     actions: {
         actionGetCalendar({commit}, idUser) {
             commit('mutationGetCalendarWaiting', {});
             const api = new CalendarApi();
-            api.getCalendar(idUser, (e, d, /* eslint-disable */r/* eslint-enable */) => {
+            api.getCalendar(idUser, (e, d, r) => {
                 if (e) {
                     StateHelper.simpleErrorManagement(e, 'mutationGetCalendarError', commit);
                 } else {
@@ -38,7 +38,7 @@ const calendar = {
         actionGetMyCalendar({commit}) {
             commit('mutationGetMyCalendarWaiting', {});
             const api = new CalendarApi();
-            api.getCalendarUser((e, d, /* eslint-disable */r/* eslint-enable */) => {
+            api.getCalendarUser((e, d, r) => {
                 if (e) {
                     StateHelper.simpleErrorManagement(e, 'mutationGetMyCalendarError', commit);
                 } else {
@@ -47,9 +47,6 @@ const calendar = {
             });
         },
         actionLogout({commit}) {
-            commit('mutationIsDisplayable');
-        },
-        actionCalendarNotDisplayable({commit}) {
             commit('mutationIsDisplayable');
         },
         actionGetClassCalendar({commit}, idClass) {
@@ -65,11 +62,6 @@ const calendar = {
                         if( eTest) {
                             StateHelper.simpleErrorManagement(eTest, 'mutationGetTestCalendarError', commit);
                         } else {
-                            /*dTest.forEach(test => {
-                                dCal.periods.push(test)
-                            })*/
-                            console.log("before COMMIT mutationGetCalendarSuccess");
-                            console.log({...dCal})
                             commit('mutationGetCalendarSuccess', { ...dCal});
                         }
                     })
@@ -78,12 +70,6 @@ const calendar = {
         }
     },
     mutations: {
-        /**
-         *
-         * @param {*} state the application state in Vuex store to modify.
-         * @param {*} data Additional data to update the state accordingly.
-         */
-
         // Get Calendar
         mutationGetMyCalendarWaiting(state, data) {
             state.calendar.state = States.WAITING;

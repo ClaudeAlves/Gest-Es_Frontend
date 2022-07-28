@@ -1,3 +1,4 @@
+<!-- main vue of the application has the navbar, the router dans the notification system -->
 <template>
   <v-app>
     <Nav_bar/>

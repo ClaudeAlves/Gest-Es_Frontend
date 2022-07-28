@@ -2,6 +2,9 @@ import Vue from 'vue'
 
 const debugEnabled = false;
 
+/**
+ * Methods to display notifications.
+ */
 export default {
     success(title, text) {
         Vue.notify({

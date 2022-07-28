@@ -10,7 +10,10 @@ import classes from "@/state/module/classes";
 import tests from "@/state/module/tests";
 
 Vue.use(Vuex);
-
+/**
+ * Store vuex that stores data, this data is accessible all over the application.
+ * @type {Store<unknown>}
+ */
 const store = new Vuex.Store({
     modules: {
         connexion,

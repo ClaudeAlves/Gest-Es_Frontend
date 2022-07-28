@@ -1,3 +1,4 @@
+<!-- menu navbar that provides navigation tools thru router -->
 <template>
 	<nav>
     <v-app-bar flat app color="teal">
@@ -5,28 +6,12 @@
         Gest-ES
       </v-toolbar-title>
       <v-spacer/>
-      <v-btn text v-if="this.isNotLoggedIn">
-        <router-link
-                     tag="div"
-                     to="/login"
-        >
-            Connexion
-        </router-link>
-      </v-btn>
-      <v-btn text v-if="this.isNotLoggedIn">
-        <router-link
-                   tag="div"
-                   to="/forgot-password"
-        >
-          Mot de passe oublié?
-        </router-link>
-      </v-btn>
       <v-btn text v-if="this.isLoggedIn">
         <router-link
                    tag="div"
                    to="/profile"
         >
-          Profile
+          Profil
         </router-link>
       </v-btn>
       <v-btn text v-if="this.isLoggedIn && !isAdmin">
@@ -62,12 +47,12 @@
           </v-list-item>
             <v-list-item>
               <v-btn text>
-                <router-link tag="div" to="/testAnnotation">Annoter test</router-link>
+                <router-link tag="div" to="/testAnnotation">Saisir des notes</router-link>
               </v-btn>
             </v-list-item>
             <v-list-item>
             <v-btn text>
-              <router-link tag="div" to="/testEdit">Editer notes tests</router-link>
+              <router-link tag="div" to="/testEdit">Editer des notes</router-link>
             </v-btn>
           </v-list-item>
 
@@ -91,8 +76,8 @@
         </router-link>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn text @click="logoutMethod" v-if="this.isLoggedIn">
-        <router-link tag="div" to="/">Déconnexion</router-link>
+      <v-btn text @click="logoutMethod()" v-if="this.isLoggedIn">
+        <router-link tag="div" to="/login">Déconnexion</router-link>
       </v-btn>
 
       <div v-if="this.isLoggedIn">
@@ -107,6 +92,8 @@
 </style>
 
 <script>
+import router from "@/router/Router";
+
 export default {
   computed: {
     isLoggedIn() {
@@ -126,9 +113,13 @@ export default {
     },
 
   },
+  mounted() {
+    router.replace("/login")
+  },
   methods: {
     logoutMethod() {
       this.$store.dispatch("actionLogout")
+      router.replace("/login")
     },
     resetStudentMarks() {
       this.$store.dispatch('actionGetSelfSynthesis');

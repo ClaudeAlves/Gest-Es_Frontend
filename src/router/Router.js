@@ -3,7 +3,10 @@ import VueRouter from "vue-router"
 import store from '@/state/store'
 
 Vue.use(VueRouter);
-
+/**
+ * Routes defines paths for the router
+ * the meta property is used to filter authentication
+ */
 const routes = [
     {
         path: "/login",
@@ -14,7 +17,10 @@ const routes = [
     {
         path: "/calendars",
         name: "calendars",
-        component: () => import("../views/calendar/PickCalendar")
+        component: () => import("../views/calendar/PickCalendar"),
+        meta: {
+            requiresAuth: true,
+        }
     },
     {
         path: "/forgot-password",
@@ -81,6 +87,9 @@ const routes = [
         }
     }
 ];
+/**
+ * Router declaration
+ */
 const router = new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
@@ -89,8 +98,7 @@ const router = new VueRouter({
 
 /**
  * Redirections for auth and admin
- * Source:
- * https://router.vuejs.org/guide/advanced/navigation-guards.html#per-route-guard
+ * this method is called before each change of path
  */
 router.beforeEach((to, from, next) => {
     // Auth required not Public

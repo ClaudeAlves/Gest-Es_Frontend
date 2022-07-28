@@ -1,3 +1,6 @@
+/**
+ * States for the store.
+ */
 export default {
     INIT: "INIT",
     WAITING: "WAITING",

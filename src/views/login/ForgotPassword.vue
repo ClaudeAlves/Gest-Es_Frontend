@@ -1,3 +1,4 @@
+<!-- Not implemented in backend so this part is not used -->
 <template>
   <div class="vertical-center">
     <div class="content">

@@ -3,28 +3,16 @@ import Notifications from "@/utils/Notifications";
 import {EvaluationApi} from "@/gen";
 import StateHelper from "@/state/StateHelper";
 
+/**
+ * Tests module stores information about tests.
+ */
 const tests = {
     state: () => ({
         tests: {
             state: States.INIT,
             message: "messageTests",
             data: {
-                tests: [
-                    {
-                        "courseId": 0,
-                        "students": [
-                            {
-                                "id": 0,
-                                "name": "string",
-                                "testValue": 0
-                            }
-                        ],
-                        "testId": 0,
-                        "testName": "string",
-                        "text": "string",
-                        "weighting": 0
-                    }
-                ], // current loaded tests infos
+                tests: [], // current loaded tests infos
             }
         }
     }),
@@ -105,7 +93,7 @@ const tests = {
         mutationGetTestsInfoSuccess(state, data) {
             state.tests.state = States.SUCCESS;
             state.tests.data.tests = {...data}
-            Notifications.success("Tests", "Créer avec succès")
+            Notifications.debug("Tests", "Accès des données de test avec succès")
         }
     }
 }

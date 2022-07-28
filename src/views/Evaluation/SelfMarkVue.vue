@@ -1,3 +1,4 @@
+<!-- Page for a student to see his marks -->
 <template>
   <v-card class="margin: 0 auto">
     <v-card-title class="page-title">

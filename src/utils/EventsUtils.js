@@ -1,3 +1,6 @@
+/**
+ * Methods that helps deal with events for and from the backend.
+ */
 export default {
     convertPeriodsToEvents(array) {
         let toReturn = [];

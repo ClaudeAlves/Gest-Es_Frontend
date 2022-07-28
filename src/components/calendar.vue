@@ -1,3 +1,4 @@
+<!-- Calendar component it has the calendar and the navigator element at the left -->
 <template>
   <v-container>
     <div class="wrap">
@@ -16,8 +17,6 @@
 
 <script>
 import {DayPilot, DayPilotCalendar, DayPilotNavigator} from '@daypilot/daypilot-lite-vue'
-import Calendar from "@/state/module/calendar";
-import calendar from "@/state/module/calendar";
 import { mapGetters } from 'vuex'
 
 export default {
@@ -48,7 +47,6 @@ export default {
   },
   methods: {
     loadEvents() {
-      // console.log({...this.events})
       this.calendar.update(this.events)
     }
   },
@@ -59,7 +57,6 @@ export default {
     calendar() {
       return this.$refs.calendar.control;
     }
-
   },
   mounted() {
     this.loadEvents();
@@ -86,8 +83,8 @@ export default {
 .calendar_default_event_inner {
   background: #2e78d6;
   color: white;
-  border-radius: 5px;
-  opacity: 0.9;
+  border-radius: 6px;
+  opacity: 0.7;
 }
 
 </style>

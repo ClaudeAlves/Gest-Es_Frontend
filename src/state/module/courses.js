@@ -3,6 +3,9 @@ import {UserApi} from "@/gen";
 import StateHelper from "@/state/StateHelper";
 import Notifications from "@/utils/Notifications";
 
+/**
+ * Courses module stores data about courses and students.
+ */
 const courses = {
     state: () => ({
         courses: {

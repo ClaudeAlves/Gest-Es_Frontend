@@ -3,27 +3,15 @@ import UserApi from '@/gen/api/UserApi'
 import Notifications from '../../utils/Notifications';
 import StateHelper from '@/state/StateHelper';
 
-
+/**
+ * Profile module stores information about a user.
+ */
 const profile = {
     state: () => ({
         profile: {
             state: States.INIT,
             message: "string",
-            data: {
-                "idUser": 0,
-                "username": "polo",
-                "firstname": "paul",
-                "lastname": "novo",
-                "birthdate": "2000-01-09",
-                "email": "polo@po.lo",
-                "password": "",
-                "roles": [
-                    {
-                        "id": 1,
-                        "name": "USER"
-                    }
-                ],
-            }
+            data: {}
         }
     }),
     getters: {
@@ -32,11 +20,6 @@ const profile = {
         },
     },
     actions: {
-        /**
-         *
-         * @param {*} { commit } the context contains a function called commit used to commit mutations.
-         * @param {*} data additional data object for the action
-         */
         actionGetUser({commit}, username) {
             // First commit the waiting mutation
             commit('mutationGetUserWaiting', {});
@@ -65,12 +48,6 @@ const profile = {
         },
     },
     mutations: {
-        /**
-         *
-         * @param {*} state the application state in Vuex store to modify.
-         * @param {*} data Additional data to update the state accordingly.
-         */
-
         // Get User
         mutationGetUserWaiting(state, data) {
             state.profile.state = States.WAITING;

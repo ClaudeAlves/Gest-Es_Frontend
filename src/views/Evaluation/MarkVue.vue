@@ -1,3 +1,4 @@
+<!-- Page to look the marks of students -->
 <template>
   <v-card class="margin: 0 auto">
     <v-card-title class="page-title">
@@ -60,6 +61,9 @@
                 class="red--text">
               {{ studentMarks.globalMean }}
             </th>
+            <th v-else-if="isNaN(studentMarks.globalMean)">
+              -
+            </th>
             <th v-else>
               {{ studentMarks.globalMean }}
             </th>
@@ -96,11 +100,11 @@
           <tr v-for="item in this.moduleInfos.marks">
             <th class="teal--text"> {{ item.studentName }}</th>
             <template v-for="mark in item.marks">
-              <th v-if="mark >= 4">
-                {{ mark }}
-              </th>
-              <th v-else-if="mark === null">
+              <th v-if="isNaN(mark) || mark === null || mark === 0">
                 -
+              </th>
+              <th v-else-if="mark >= 4">
+                {{ mark }}
               </th>
               <th v-else
                 class="red--text">
@@ -108,9 +112,12 @@
               </th>
             </template>
             <template>
-              <th v-if="item.moduleMean < 4"
+              <th v-if="isNaN(item.moduleMean)">
+                -
+              </th>
+              <th v-else-if="item.moduleMean < 4"
                   class="red--text">
-                {{ item.moduleMean }}
+                {{ item.moduleMean}}
               </th>
               <th v-else>
                 {{ item.moduleMean }}
@@ -118,6 +125,7 @@
               <th>
                 {{ item.marksUnderMean }}
               </th>
+
             </template>
           </tr>
         </tbody>

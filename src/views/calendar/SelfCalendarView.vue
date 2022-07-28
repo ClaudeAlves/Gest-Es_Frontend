@@ -1,3 +1,4 @@
+<!-- Calendar of the current user -->
 <template>
   <v-card>
       <v-card-title class ="page-title">

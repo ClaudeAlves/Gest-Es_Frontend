@@ -1,7 +1,8 @@
+<!-- Page to modify a specific test mark -->
 <template>
   <v-card>
     <v-card-title class="page-title">
-      Modification de tests
+      Editer des notes
 
     </v-card-title>
     <v-container>
